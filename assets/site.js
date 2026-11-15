@@ -379,7 +379,7 @@
   }
   function fixUrl(section) {
     if (!CORRECTION_FORM.url) return null;
-    var v = currentView(), page = v === "home" ? "Home" : byId[v].name;
+    var v = currentView(), page = byId[v] ? byId[v].name : (v === "home" ? "Home" : v);
     return CORRECTION_FORM.url + (CORRECTION_FORM.url.indexOf("?") < 0 ? "?" : "&") + "usp=pp_url" +
       "&" + CORRECTION_FORM.entryPage + "=" + encodeURIComponent(page) +
       "&" + CORRECTION_FORM.entrySection + "=" + encodeURIComponent(section);
