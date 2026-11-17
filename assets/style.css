@@ -232,3 +232,6 @@ a.fix { color: var(--maroon); font-weight: 500; white-space: nowrap; }
 .mine .pick { display: grid; gap: 2px; padding-top: 8px; border-top: 1px dashed var(--line); }
 .mine .pick b { color: var(--maroon); font-size: .9rem; }
 .mine .pick p { font-size: .95rem; }
+
+/* Alternative names and spellings */
+.aka { color: var(--muted); font-size: .95rem; margin: 0; }
