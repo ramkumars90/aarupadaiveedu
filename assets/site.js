@@ -1,33 +1,55 @@
 (function () {
   var PAGE = document.body.getAttribute("data-page") || "home";
+  var TA = (document.documentElement.lang || "en").slice(0, 2) === "ta";
+  var LANG = TA ? "ta" : "en";
+  // Pages that have a Tamil version. Tamil pages link to the English page for the rest.
+  var TA_READY = ["home", "thiruchendur"];
+  function L(en, ta) { return TA ? ta : en; }
+
   var abodes = [
     { n: 1, id: "thiruparankundram", name: "Thiruparankundram", ta: "திருப்பரங்குன்றம்", place: "Madurai", lat: 9.88, lon: 78.07,
-      legend: "Where Murugan married Deivanai, daughter of Indra, after his victory." },
+      legend: "Where Murugan married Deivanai, daughter of Indra, after his victory.",
+      taPlace: "மதுரை", taLegend: "வெற்றிக்குப் பின், இந்திரனின் மகள் தெய்வானையை முருகன் மணந்த தலம்." },
     { n: 2, id: "thiruchendur", name: "Thiruchendur", ta: "திருச்செந்தூர்", place: "Thoothukudi district, on the sea", lat: 8.50, lon: 78.12,
-      legend: "The shore where he defeated Soorapadman. The heart of Kanda Sashti." },
+      legend: "The shore where he defeated Soorapadman. The heart of Kanda Sashti.",
+      taPlace: "தூத்துக்குடி மாவட்டம், கடற்கரையில்", taLegend: "சூரபத்மனை முருகன் வென்ற கடற்கரை. கந்த சஷ்டியின் மையம்." },
     { n: 3, id: "palani", name: "Palani", ta: "பழனி", place: "Dindigul district", lat: 10.45, lon: 77.52,
-      legend: "Where he stood as a renunciant, Dhandayuthapani, after the episode of the fruit." },
+      legend: "Where he stood as a renunciant, Dhandayuthapani, after the episode of the fruit.",
+      taPlace: "திண்டுக்கல் மாவட்டம்", taLegend: "ஞானப்பழக் கதைக்குப் பின், தண்டாயுதபாணியாகத் துறவுக் கோலத்தில் நின்ற தலம்." },
     { n: 4, id: "swamimalai", name: "Swamimalai", ta: "சுவாமிமலை", place: "Near Kumbakonam", lat: 10.96, lon: 79.33,
-      legend: "Where the child Murugan taught the meaning of Om to his father Shiva." },
+      legend: "Where the child Murugan taught the meaning of Om to his father Shiva.",
+      taPlace: "கும்பகோணம் அருகில்", taLegend: "குழந்தை முருகன், தந்தை சிவனுக்குப் பிரணவ மந்திரமான ஓம் என்பதன் பொருளை உபதேசித்த தலம்." },
     { n: 5, id: "thiruthani", name: "Thiruthani", ta: "திருத்தணி", place: "Tiruvallur district, near Chennai", lat: 13.18, lon: 79.61,
-      legend: "Where his anger cooled after battle, and where he married Valli." },
+      legend: "Where his anger cooled after battle, and where he married Valli.",
+      taPlace: "திருவள்ளூர் மாவட்டம், சென்னை அருகில்", taLegend: "போருக்குப் பின் சினம் தணிந்து, வள்ளியை மணந்த தலம்." },
     { n: 6, id: "pazhamudircholai", name: "Pazhamudircholai", ta: "பழமுதிர்சோலை", place: "Near Madurai, in the Alagar hills", lat: 10.07, lon: 78.21,
-      legend: "Where he tested Avvaiyar with the riddle of the 'hot fruit'." }
+      legend: "Where he tested Avvaiyar with the riddle of the 'hot fruit'.",
+      taPlace: "மதுரை அருகில், அழகர் மலையில்", taLegend: "'சுட்ட பழம் வேண்டுமா, சுடாத பழம் வேண்டுமா?' என்று ஔவையாரைச் சோதித்த தலம்." }
   ];
 
   var IDS = ["thiruparankundram", "thiruchendur", "palani", "swamimalai", "thiruthani", "pazhamudircholai"];
-  if (PAGE === "home" && IDS.indexOf(location.hash.slice(1)) >= 0) { location.replace(location.hash.slice(1) + ".html"); return; }
+  var byId = {}; abodes.forEach(function (a) { byId[a.id] = a; });
+  function aname(id) { return TA ? byId[id].ta : byId[id].name; }
+  function link(id) { return (TA && TA_READY.indexOf(id) < 0 ? "../" : "") + id + ".html"; }
+  if (PAGE === "home" && IDS.indexOf(location.hash.slice(1)) >= 0) { location.replace(link(location.hash.slice(1))); return; }
+
+  // On Tamil pages, point links at the English page until that page is translated.
+  if (TA) document.querySelectorAll("a[href]").forEach(function (a) {
+    var m = a.getAttribute("href").match(/^([a-z]+)\.html$/);
+    if (m && IDS.indexOf(m[1]) >= 0) a.setAttribute("href", link(m[1]));
+  });
 
   // Abode cards
   var list = document.getElementById("abode-list");
   if (list) list.innerHTML = abodes.map(function (a) {
-    return '<a class="abode" href="' + a.id + '.html">' +
+    var pill = TA ? (TA_READY.indexOf(a.id) >= 0 ? "வழிகாட்டியைப் படிக்க" : "ஆங்கில வழிகாட்டி") : "Read the guide";
+    return '<a class="abode" href="' + link(a.id) + '">' +
       '<span class="num" aria-hidden="true">' + a.n + "</span>" +
-      "<h3>" + a.name + "</h3>" +
-      '<span class="ta" lang="ta">' + a.ta + "</span>" +
-      '<span class="place">' + a.place + "</span>" +
-      '<p class="legend">' + a.legend + "</p>" +
-      '<span class="pill ready">Read the guide</span>' +
+      "<h3>" + (TA ? a.ta : a.name) + "</h3>" +
+      '<span class="ta" lang="' + (TA ? "en" : "ta") + '">' + (TA ? a.name : a.ta) + "</span>" +
+      '<span class="place">' + (TA ? a.taPlace : a.place) + "</span>" +
+      '<p class="legend">' + (TA ? a.taLegend : a.legend) + "</p>" +
+      '<span class="pill ready">' + pill + "</span>" +
       "</a>";
   }).join("");
 
@@ -36,10 +58,6 @@
   function py(lat) { return ((13.8 - lat) * 92 + 20).toFixed(1); }
   var outline = [[13.55,80.25],[13.08,80.29],[12.6,80.2],[11.93,79.84],[11.4,79.75],[10.77,79.85],[10.28,79.86],[10.2,79.4],[9.7,79.05],[9.4,78.95],[9.25,78.6],[9.0,78.3],[8.8,78.17],[8.5,78.13],[8.3,77.85],[8.08,77.55],[8.3,77.2],[8.8,77.15],[9.5,77.2],[10.0,77.25],[10.3,76.95],[10.7,76.85],[11.05,76.65],[11.35,76.3],[11.6,76.4],[11.75,76.9],[12.0,77.4],[12.3,77.6],[12.7,77.75],[12.75,78.3],[12.95,78.5],[13.2,78.7],[13.45,79.1],[13.6,79.6]];
   var pts = outline.map(function (p) { return px(p[1]) + "," + py(p[0]); }).join(" ");
-  var cities = [
-    { name: "Chennai", lat: 13.08, lon: 80.27, dx: 0, dy: 18, anchor: "end" },
-    { name: "Madurai", lat: 9.93, lon: 78.12, dx: 9, dy: 14, anchor: "start" }
-  ];
   var labelPos = {
     thiruparankundram: { dx: -10, dy: 4, anchor: "end" },
     pazhamudircholai: { dx: 10, dy: -4, anchor: "start" },
@@ -48,7 +66,6 @@
     thiruthani: { dx: -10, dy: 4, anchor: "end" },
     thiruchendur: { dx: 10, dy: 4, anchor: "start" }
   };
-  var byId = {}; abodes.forEach(function (a) { byId[a.id] = a; });
   if (document.getElementById("planner")) (function () {
   // ---------- Trip planner ----------
   var START = {
@@ -61,27 +78,52 @@
   };
   var STOPOVER = [START.chennai, START.trichy, START.madurai, { name: "Villupuram", lat: 11.94, lon: 79.49 }, { name: "Salem", lat: 11.66, lon: 78.15 }, { name: "Tirunelveli", lat: 8.71, lon: 77.76 }, { name: "Vellore", lat: 12.92, lon: 79.13 }, { name: "Krishnagiri", lat: 12.52, lon: 78.21 }];
   var STAY = { thiruparankundram: "Madurai", pazhamudircholai: "Madurai", swamimalai: "Kumbakonam", thiruchendur: "Thiruchendur", palani: "Palani", thiruthani: "Thiruthani" };
+  // Town names stay in English inside the planner; tn() shows them in the page's language.
+  var TOWN_TA = { Chennai: "சென்னை", Bengaluru: "பெங்களூரு", Coimbatore: "கோயம்புத்தூர்", Madurai: "மதுரை", Tiruchirappalli: "திருச்சிராப்பள்ளி",
+    Puducherry: "புதுச்சேரி", Villupuram: "விழுப்புரம்", Salem: "சேலம்", Tirunelveli: "திருநெல்வேலி", Vellore: "வேலூர்", Krishnagiri: "கிருஷ்ணகிரி",
+    Kumbakonam: "கும்பகோணம்", Palani: "பழனி", Thiruchendur: "திருச்செந்தூர்", Thiruthani: "திருத்தணி" };
+  function tn(n) { return TA && TOWN_TA[n] ? TOWN_TA[n] : n; }
   var VISIT_H = { thiruparankundram: 1.5, thiruchendur: 3, palani: 3, swamimalai: 2, thiruthani: 2.5, pazhamudircholai: 2 };
   var VISIT_TIP = {
-    thiruparankundram: "Cave temple at the foot of the hill. Easy for all ages.",
-    thiruchendur: "Sea bath, then darshan. Queue entry closes at 7 PM.",
-    palani: "Take the rope car or winch up if needed. Free darshan until 7:30 PM.",
-    swamimalai: "60 steps. Closed roughly 12:30–4 PM, so time your arrival.",
-    thiruthani: "365 steps or the ghat road. Book abhishekam a day ahead.",
-    pazhamudircholai: "Temple shuttle up from Alagar Kovil. Closes around 6 PM."
+    en: {
+      thiruparankundram: "Cave temple at the foot of the hill. Easy for all ages.",
+      thiruchendur: "Sea bath, then darshan. Free queue entry closes at 7:30 PM.",
+      palani: "Take the rope car or winch up if needed. The temple is open until 8 PM.",
+      swamimalai: "60 steps, or the lift. Closed roughly 12:30–4 PM, so time your arrival.",
+      thiruthani: "365 steps or the ghat road. Book abhishekam a day ahead.",
+      pazhamudircholai: "Temple shuttle up from Alagar Kovil. Closes around 6 PM."
+    },
+    ta: {
+      thiruparankundram: "மலையடிவாரத்தில் உள்ள குடவரைக் கோயில். எல்லா வயதினருக்கும் எளிது.",
+      thiruchendur: "முதலில் கடல் நீராடல், பிறகு தரிசனம். இலவச வரிசையில் இரவு 7:30 வரை அனுமதி.",
+      palani: "தேவைப்பட்டால் ரோப் கார் அல்லது வின்ச்சில் மேலே செல்லுங்கள். கோயில் இரவு 8 மணி வரை திறந்திருக்கும்.",
+      swamimalai: "60 படிகள், அல்லது லிஃப்ட். மதியம் சுமார் 12:30 முதல் 4 மணி வரை நடை சாத்தப்படும்; அதற்கேற்ப வாருங்கள்.",
+      thiruthani: "365 படிகள் அல்லது மலைப்பாதை. அபிஷேகத்துக்கு ஒரு நாள் முன்பே பதிவு செய்யுங்கள்.",
+      pazhamudircholai: "அழகர் கோவிலிலிருந்து கோயில் வாகனத்தில் மேலே செல்லலாம். மாலை சுமார் 6 மணிக்கு நடை சாத்தப்படும்."
+    }
   };
   var SPARE = {
-    Madurai: "Meenakshi Amman temple and the old city.",
-    Kumbakonam: "Darasuram and the Navagraha temples nearby.",
-    Palani: "A day trip up to Kodaikanal, about 65 km.",
-    Thiruchendur: "Kulasekarapattinam and the quiet coast.",
-    Thiruthani: "Kanchipuram, about 40 km away."
+    en: {
+      Madurai: "Meenakshi Amman temple and the old city.",
+      Kumbakonam: "Darasuram and the Navagraha temples nearby.",
+      Palani: "A day trip up to Kodaikanal, about 65 km.",
+      Thiruchendur: "Kulasekarapattinam and the quiet coast.",
+      Thiruthani: "Kanchipuram, about 40 km away."
+    },
+    ta: {
+      Madurai: "மீனாட்சி அம்மன் கோயிலும் பழைய நகரமும்.",
+      Kumbakonam: "அருகிலுள்ள தாராசுரமும் நவக்கிரகக் கோயில்களும்.",
+      Palani: "சுமார் 65 கி.மீ தொலைவிலுள்ள கொடைக்கானலுக்கு ஒரு நாள் பயணம்.",
+      Thiruchendur: "குலசேகரப்பட்டினமும் அமைதியான கடற்கரையும்.",
+      Thiruthani: "சுமார் 40 கி.மீ தொலைவிலுள்ள காஞ்சிபுரம்."
+    }
   };
   var MODE = {
-    car: { label: "car", verb: "Drive", speed: 45, maxTravel: 8, day: 10 },
-    bus: { label: "bus", verb: "Bus", speed: 35, maxTravel: 7, day: 9 },
-    train: { label: "train and local taxi", verb: "Train/taxi", speed: 45, maxTravel: 7, day: 9 }
+    car: { label: "car", taLabel: "கார்", verb: "Drive", taVerb: "கார்", speed: 45, maxTravel: 8, day: 10 },
+    bus: { label: "bus", taLabel: "பேருந்து", verb: "Bus", taVerb: "பேருந்து", speed: 35, maxTravel: 7, day: 9 },
+    train: { label: "train and local taxi", taLabel: "ரயில், உள்ளூர் டாக்சி", verb: "Train/taxi", taVerb: "ரயில்/டாக்சி", speed: 45, maxTravel: 7, day: 9 }
   };
+  var KM = L(" km", " கி.மீ"), ABOUT = L("about ", "சுமார் ");
 
   function km(a, b) {
     var R = 6371, toR = Math.PI / 180;
@@ -97,12 +139,13 @@
     if (mode === "train") t += 0.75;
     return t;
   }
-  function fmtH(h) { var r = Math.max(0.5, Math.round(h * 2) / 2); return (r % 1 ? r.toFixed(1) : r) + " h"; }
+  function fmtH(h) { var r = Math.max(0.5, Math.round(h * 2) / 2); return (r % 1 ? r.toFixed(1) : r) + L(" h", " மணி நேரம்"); }
   var MODE_NOW = "car";
   function placeName(p) {
-    if (!p.id) return p.name;
+    if (!p.id) return tn(p.name);
     var n = byId[p.id].name, town = STAY[p.id];
-    return (MODE_NOW !== "car" && town !== n) ? town + " (for " + n + ")" : n;
+    if (MODE_NOW !== "car" && town !== n) return TA ? tn(town) + " (" + aname(p.id) + " செல்ல)" : town + " (for " + n + ")";
+    return aname(p.id);
   }
 
   function permutations(arr) {
@@ -142,7 +185,7 @@
       var from = stops[i - 1], to = stops[i];
       var d = km(from, to), t = hours(d, mode), v = to.id ? VISIT_H[to.id] : 0;
       var short = d < 40;
-      function nm(x) { return short ? (x.id ? byId[x.id].name : x.name) : placeName(x); }
+      function nm(x) { return short ? (x.id ? aname(x.id) : tn(x.name)) : placeName(x); }
       var leg = { type: "travel", from: nm(from), to: nm(to), km: d, h: t };
       if (mode === "train" && t > 6) {
         leg.overnight = true;
@@ -153,9 +196,9 @@
         if (used > 0) { cur.end = from; newDay(); }
         var mid = nearestStopover(from, to);
         var d1 = km(from, mid), d2 = km(mid, to);
-        cur.items.push({ type: "travel", from: placeName(from), to: mid.name, km: d1, h: hours(d1, mode) });
+        cur.items.push({ type: "travel", from: placeName(from), to: tn(mid.name), km: d1, h: hours(d1, mode) });
         cur.end = mid; newDay();
-        cur.items.push({ type: "travel", from: mid.name, to: placeName(to), km: d2, h: hours(d2, mode) });
+        cur.items.push({ type: "travel", from: tn(mid.name), to: placeName(to), km: d2, h: hours(d2, mode) });
         used = hours(d2, mode);
       } else {
         var slack = to.home ? 2.5 : 0;
@@ -205,28 +248,29 @@
   }
 
   // ---------- Map ----------
+  var MAP_TITLE = L("Map of Tamil Nadu showing the six abodes and the planned route", "ஆறு படை வீடுகளையும் திட்டமிட்ட பயண வழியையும் காட்டும் தமிழ்நாடு வரைபடம்");
   function drawMap(p) {
     var routeStops = [p.start].concat(p.order.map(function (id) { return byId[id]; }));
     if (p.round) routeStops.push(p.start);
     var routePts = routeStops.map(function (s) { return px(s.lon) + "," + py(s.lat); }).join(" ");
-    var svg = '<title id="map-title">Map of Tamil Nadu showing the six abodes and the planned route</title>' +
+    var svg = '<title id="map-title">' + MAP_TITLE + '</title>' +
       '<polygon points="' + pts + '" fill="#f3e3c3" stroke="#c39233" stroke-width="1.5" stroke-linejoin="round"/>' +
-      '<text x="400" y="330" font-size="12" fill="#6e5a4c" text-anchor="middle" font-style="italic">Bay of Bengal</text>' +
-      '<text x="350" y="548" font-size="12" fill="#6e5a4c" text-anchor="middle" font-style="italic">Gulf of Mannar</text>' +
+      '<text x="' + L(400, 385) + '" y="330" font-size="12" fill="#6e5a4c" text-anchor="middle" font-style="italic">' + L("Bay of Bengal", "வங்காள விரிகுடா") + '</text>' +
+      '<text x="350" y="548" font-size="12" fill="#6e5a4c" text-anchor="middle" font-style="italic">' + L("Gulf of Mannar", "மன்னார் வளைகுடா") + '</text>' +
       '<polyline points="' + routePts + '" fill="none" stroke="#d9700b" stroke-width="2" stroke-dasharray="5 4" opacity=".85"/>';
     var s = p.start, sx = +px(s.lon), sy = +py(s.lat);
     var inside = sx <= 430 && sx >= 10;
     if (inside) {
       var anchor = sx > 330 ? "end" : "start", dx = sx > 330 ? -10 : 10;
       svg += '<rect x="' + (sx - 6) + '" y="' + (sy - 6) + '" width="12" height="12" fill="#2f5d3a" transform="rotate(45 ' + sx + ' ' + sy + ')"/>' +
-        '<text x="' + (sx + dx) + '" y="' + (sy + 18) + '" font-size="12" font-weight="700" fill="#2f5d3a" text-anchor="' + anchor + '">Start: ' + s.name + '</text>';
+        '<text x="' + (sx + dx) + '" y="' + (sy + 18) + '" font-size="12" font-weight="700" fill="#2f5d3a" text-anchor="' + anchor + '">' + L("Start: ", "புறப்பாடு: ") + tn(s.name) + '</text>';
     }
     abodes.forEach(function (a) {
       var l = labelPos[a.id], x = px(a.lon), y = py(a.lat);
-      svg += '<a href="' + a.id + '.html">' +
+      svg += '<a href="' + link(a.id) + '">' +
         '<circle cx="' + x + '" cy="' + y + '" r="9" fill="#6a1420" stroke="#6a1420" stroke-width="2"/>' +
         '<text x="' + x + '" y="' + (+y + 4) + '" font-size="11" font-weight="700" text-anchor="middle" fill="#fff">' + (p.order.indexOf(a.id) + 1) + "</text>" +
-        '<text x="' + (+x + l.dx * 1.4) + '" y="' + (+y + l.dy) + '" font-size="13" fill="#4a0d16" font-weight="500" text-anchor="' + l.anchor + '">' + a.name + "</text></a>";
+        '<text x="' + (+x + l.dx * 1.4) + '" y="' + (+y + l.dy) + '" font-size="' + L(13, 12) + '" fill="#4a0d16" font-weight="500" text-anchor="' + l.anchor + '">' + aname(a.id) + "</text></a>";
     });
     document.getElementById("map").innerHTML = svg;
   }
@@ -235,47 +279,51 @@
   var CIRCLED = ["①", "②", "③", "④", "⑤", "⑥"];
   function render(p) {
     drawMap(p);
-    var m = MODE[p.mode];
-    var sum = '<span class="fact"><b>Days</b> ' + p.days.length + '</span>' +
-      '<span class="fact"><b>Distance</b> about ' + (Math.round(p.totalKm / 10) * 10).toLocaleString("en-IN") + ' km</span>' +
-      '<span class="fact"><b>On the road</b> about ' + Math.round(p.totalH) + ' h</span>';
+    var m = MODE[p.mode], startName = tn(p.start.name), modeLabel = TA ? m.taLabel : m.label;
+    var sum = '<span class="fact"><b>' + L("Days", "நாட்கள்") + '</b> ' + p.days.length + '</span>' +
+      '<span class="fact"><b>' + L("Distance", "தூரம்") + '</b> ' + ABOUT + (Math.round(p.totalKm / 10) * 10).toLocaleString("en-IN") + KM + '</span>' +
+      '<span class="fact"><b>' + L("On the road", "பயண நேரம்") + '</b> ' + ABOUT + Math.round(p.totalH) + L(" h", " மணி நேரம்") + '</span>';
     document.getElementById("p-summary").innerHTML = sum;
     var note = "";
     if (p.minDays > p.wanted) {
-      note = "<b>This needs at least " + p.minDays + " days</b> from " + p.start.name + " by " + m.label + ". The plan below uses " + p.minDays + ". To save time, end the trip at the last temple, or use overnight trains for the long legs.";
+      note = TA
+        ? "<b>இந்தப் பயணத்துக்குக் குறைந்தது " + p.minDays + " நாட்கள் தேவை</b> (புறப்படும் இடம்: " + startName + ", பயண வகை: " + modeLabel + "). கீழே உள்ள திட்டம் " + p.minDays + " நாட்களைக் கொண்டது. நேரத்தை மிச்சப்படுத்த, கடைசிக் கோயிலில் பயணத்தை முடியுங்கள், அல்லது நீண்ட தூரங்களுக்கு இரவு ரயில்களைப் பயன்படுத்துங்கள்."
+        : "<b>This needs at least " + p.minDays + " days</b> from " + startName + " by " + modeLabel + ". The plan below uses " + p.minDays + ". To save time, end the trip at the last temple, or use overnight trains for the long legs.";
     } else if (p.days.some(function (d) { return d.spare; })) {
-      note = "<b>You have time to spare.</b> The plan adds rest days at good bases, so the trip is not rushed.";
+      note = L("<b>You have time to spare.</b> The plan adds rest days at good bases, so the trip is not rushed.",
+        "<b>உங்களிடம் கூடுதல் நேரம் உள்ளது.</b> அவசரமில்லாமல் பயணிக்க, நல்ல தங்குமிடங்களில் ஓய்வு நாட்கள் சேர்க்கப்பட்டுள்ளன.");
     }
     var n = document.getElementById("p-note"); n.innerHTML = note; n.hidden = !note;
     var html = p.days.map(function (d, i) {
       var title, lines = [];
       if (d.spare) {
-        title = "Rest day in " + d.town;
-        lines.push("<p>Slow down, or see more nearby: " + (SPARE[d.town] || "explore the town.") + "</p>");
+        title = L("Rest day in " + d.town, "ஓய்வு நாள்: " + tn(d.town));
+        lines.push("<p>" + L("Slow down, or see more nearby: " + (SPARE.en[d.town] || "explore the town."),
+          "நிதானமாக ஓய்வெடுங்கள், அல்லது அருகில் உள்ளவற்றைப் பாருங்கள்: " + (SPARE.ta[d.town] || "ஊரைச் சுற்றிப் பாருங்கள்.")) + "</p>");
       } else {
         var visits = d.items.filter(function (it) { return it.type === "visit"; }).map(function (it) {
-          return '<a href="' + it.id + '.html">' + byId[it.id].name + "</a> " + CIRCLED[p.order.indexOf(it.id)];
+          return '<a href="' + link(it.id) + '">' + aname(it.id) + "</a> " + CIRCLED[p.order.indexOf(it.id)];
         });
         var travels = d.items.filter(function (it) { return it.type === "travel"; });
-        title = visits.length ? visits.join(" and ") : (travels.length ? travels[travels.length - 1].from + " → " + travels[travels.length - 1].to : "Travel");
+        title = visits.length ? visits.join(L(" and ", " மற்றும் ")) : (travels.length ? travels[travels.length - 1].from + " → " + travels[travels.length - 1].to : L("Travel", "பயணம்"));
         d.items.forEach(function (it) {
           if (it.type === "travel") {
-            var how = it.overnight ? "Overnight train" : (it.km < 40 && p.mode !== "car" ? "Local taxi or bus" : m.verb);
-            lines.push('<div class="meta">' + how + ": " + it.from + " → " + it.to + " · about " + it.km + " km · " + fmtH(it.h) + "</div>");
+            var how = it.overnight ? L("Overnight train", "இரவு ரயில்") : (it.km < 40 && p.mode !== "car" ? L("Local taxi or bus", "உள்ளூர் டாக்சி அல்லது பேருந்து") : (TA ? m.taVerb : m.verb));
+            lines.push('<div class="meta">' + how + ": " + it.from + " → " + it.to + " · " + ABOUT + it.km + KM + " · " + fmtH(it.h) + "</div>");
           } else if (it.type === "arrive") {
-            lines.push('<div class="meta">Arrive in ' + it.place + " in the morning.</div>");
+            lines.push('<div class="meta">' + L("Arrive in " + it.place + " in the morning.", "காலையில் " + it.place + " வந்தடைதல்.") + "</div>");
           } else {
-            lines.push("<p>" + VISIT_TIP[it.id] + " Allow about " + fmtH(VISIT_H[it.id]) + ".</p>");
+            lines.push("<p>" + VISIT_TIP[LANG][it.id] + L(" Allow about " + fmtH(VISIT_H[it.id]) + ".", " தரிசனத்துக்குச் சுமார் " + fmtH(VISIT_H[it.id]) + " ஒதுக்குங்கள்.") + "</p>");
           }
         });
         var e = d.end, last = i === p.days.length - 1;
-        var town = e && e.id ? STAY[e.id] : (e && e.name);
-        if (!last && d.onTrain) lines.push('<div class="meta stay">Sleep on the train.</div>');
-        else if (!last && town) lines.push('<div class="meta stay">Stay: ' + town + "</div>");
-        if (last && !p.round) lines.push('<div class="meta stay">Head home from ' + town + ".</div>");
-        if (last && p.round) lines.push('<div class="meta stay">Back in ' + p.start.name + ".</div>");
+        var town = tn(e && e.id ? STAY[e.id] : (e && e.name));
+        if (!last && d.onTrain) lines.push('<div class="meta stay">' + L("Sleep on the train.", "இரவு ரயிலிலேயே உறக்கம்.") + "</div>");
+        else if (!last && town) lines.push('<div class="meta stay">' + L("Stay: ", "தங்குமிடம்: ") + town + "</div>");
+        if (last && !p.round) lines.push('<div class="meta stay">' + L("Head home from " + town + ".", "பயண முடிவு: " + town + ". அங்கிருந்து வீடு திரும்புங்கள்.") + "</div>");
+        if (last && p.round) lines.push('<div class="meta stay">' + L("Back in " + startName + ".", "மீண்டும் " + startName + " வந்தடைதல்.") + "</div>");
       }
-      return '<li><span class="day">Day ' + (i + 1) + '</span><div><div class="leg">' + title + "</div>" + lines.join("") + "</div></li>";
+      return '<li><span class="day">' + L("Day ", "நாள் ") + (i + 1) + '</span><div><div class="leg">' + title + "</div>" + lines.join("") + "</div></li>";
     }).join("");
     document.getElementById("route").innerHTML = html;
     lastPlan = p;
@@ -283,17 +331,20 @@
   var lastPlan = null;
 
   function planText(p) {
-    var out = ["Aaru Padai trip plan: " + p.days.length + " days from " + p.start.name + " by " + MODE[p.mode].label, ""];
+    var m = MODE[p.mode], startName = tn(p.start.name);
+    var out = [L("Aaru Padai trip plan: " + p.days.length + " days from " + startName + " by " + m.label,
+      "ஆறுபடை வீடு பயணத் திட்டம்: " + p.days.length + " நாட்கள். புறப்படும் இடம்: " + startName + ", பயண வகை: " + m.taLabel), ""];
     p.days.forEach(function (d, i) {
-      if (d.spare) { out.push("Day " + (i + 1) + ": Rest day in " + d.town); return; }
+      var day = L("Day ", "நாள் ") + (i + 1) + ": ";
+      if (d.spare) { out.push(day + L("Rest day in " + d.town, "ஓய்வு நாள், " + tn(d.town))); return; }
       var parts = d.items.map(function (it) {
-        if (it.type === "travel") return it.from + " → " + it.to + " (" + it.km + " km)";
-        if (it.type === "visit") return "darshan at " + byId[it.id].name;
-        return "arrive " + it.place;
+        if (it.type === "travel") return it.from + " → " + it.to + " (" + it.km + KM + ")";
+        if (it.type === "visit") return L("darshan at " + aname(it.id), aname(it.id) + " தரிசனம்");
+        return L("arrive " + it.place, it.place + " வந்தடைதல்");
       });
-      out.push("Day " + (i + 1) + ": " + parts.join(", "));
+      out.push(day + parts.join(", "));
     });
-    out.push("", "Distances and times are estimates.");
+    out.push("", L("Distances and times are estimates.", "தூரமும் நேரமும் தோராயமானவை."));
     return out.join("\n");
   }
 
@@ -312,16 +363,18 @@
   form.addEventListener("change", update);
   form.addEventListener("submit", function (e) { e.preventDefault(); update(); });
   document.getElementById("p-copy").addEventListener("click", function () {
-    var btn = this, txt = planText(lastPlan);
-    function done(msg) { btn.textContent = msg; setTimeout(function () { btn.textContent = "Copy plan"; }, 2000); }
-    try { navigator.clipboard.writeText(txt).then(function () { done("Copied"); }, function () { done("Copy failed"); }); }
-    catch (e) { done("Copy failed"); }
+    var btn = this, txt = planText(lastPlan), label = btn.textContent;
+    function done(msg) { btn.textContent = msg; setTimeout(function () { btn.textContent = label; }, 2000); }
+    try { navigator.clipboard.writeText(txt).then(function () { done(L("Copied", "நகலெடுக்கப்பட்டது")); }, function () { done(L("Copy failed", "நகலெடுக்க முடியவில்லை")); }); }
+    catch (e) { done(L("Copy failed", "நகலெடுக்க முடியவில்லை")); }
   });
   update();
   })();
 
   // Checklist (remembered on this device only)
-  var items = ["Veshti / dhoti or saree / churidar", "Towel and a change of clothes for the sea bath", "Plastic-free bag for offerings", "Cash in small notes for counters", "Printed or saved booking confirmation", "Water bottle and sun cap for the beach", "A list of who you are praying for"];
+  var items = TA
+    ? ["வேட்டி, அல்லது புடவை / சுடிதார்", "கடல் நீராடலுக்குத் துண்டும் மாற்று உடையும்", "காணிக்கைப் பொருட்களுக்குப் பிளாஸ்டிக் இல்லாத பை", "கவுண்டர்களுக்குச் சில்லறை நோட்டுகள்", "முன்பதிவு உறுதிச்சீட்டு, அச்சிட்டோ கைபேசியில் சேமித்தோ", "தண்ணீர் பாட்டிலும், கடற்கரை வெயிலுக்குத் தொப்பியும்", "யாருக்காக வேண்டிக்கொள்கிறீர்கள் என்ற பட்டியல்"]
+    : ["Veshti / dhoti or saree / churidar", "Towel and a change of clothes for the sea bath", "Plastic-free bag for offerings", "Cash in small notes for counters", "Printed or saved booking confirmation", "Water bottle and sun cap for the beach", "A list of who you are praying for"];
   var KEY = "aarupadai-checklist-thiruchendur";
   var saved = {};
   try { saved = JSON.parse(localStorage.getItem(KEY) || "{}"); } catch (e) { saved = {}; }
@@ -360,12 +413,14 @@
   function currentView() { return PAGE; }
   function pageUrl(view) {
     if (!SITE_READY) return location.href.split("#")[0];
-    return SITE_URL + "/" + (view === "home" ? "" : view);
+    return SITE_URL + (TA ? "/ta/" : "/") + (view === "home" ? "" : view);
   }
   function shareText(view) {
-    if (view === "home") return "Aaru Padai: a pilgrim's guide to the six abodes of Lord Murugan, with timings, costs and a trip planner. " + pageUrl(view);
+    if (view === "home") return L("Aaru Padai: a pilgrim's guide to the six abodes of Lord Murugan, with timings, costs and a trip planner. ",
+      "ஆறுபடை வீடு: முருகப்பெருமானின் ஆறு படை வீடுகளுக்கான யாத்திரை வழிகாட்டி. தரிசன நேரம், கட்டணம், பயணத் திட்டம். ") + pageUrl(view);
     var a = byId[view];
-    return a.name + " (" + a.ta + "): darshan timings, ticket costs and how to reach, on Aaru Padai. " + pageUrl(view);
+    return L(a.name + " (" + a.ta + "): darshan timings, ticket costs and how to reach, on Aaru Padai. ",
+      a.ta + ": தரிசன நேரம், டிக்கெட் கட்டணம், செல்லும் வழி. ஆறுபடை வீடு வழிகாட்டியில். ") + pageUrl(view);
   }
   function updateShare() {
     var v = currentView();
@@ -380,6 +435,7 @@
   function fixUrl(section) {
     if (!CORRECTION_FORM.url) return null;
     var v = currentView(), page = byId[v] ? byId[v].name : (v === "home" ? "Home" : v);
+    if (TA) page += " (Tamil)";
     return CORRECTION_FORM.url + (CORRECTION_FORM.url.indexOf("?") < 0 ? "?" : "&") + "usp=pp_url" +
       "&" + CORRECTION_FORM.entryPage + "=" + encodeURIComponent(page) +
       "&" + CORRECTION_FORM.entrySection + "=" + encodeURIComponent(section);
@@ -389,7 +445,7 @@
     var nx = p.nextElementSibling; if (nx && nx.matches('p.checked')) return;
     var box = p.closest(".panel") || p.closest("section"), h = box && box.querySelector("h2, h3");
     var name = h ? h.textContent.trim() : "General";
-    p.insertAdjacentHTML("beforeend", ' · <a class="fix" href="#" data-fix="' + name.replace(/"/g, "") + '">Suggest a correction</a>');
+    p.insertAdjacentHTML("beforeend", ' · <a class="fix" href="#" data-fix="' + name.replace(/"/g, "") + '">' + L("Suggest a correction", "திருத்தம் தெரிவிக்க") + "</a>");
   });
   function updateFix() {
     document.querySelectorAll("a.fix").forEach(function (a) {
@@ -400,7 +456,7 @@
   }
   document.addEventListener("click", function (e) {
     var a = e.target.closest && e.target.closest("a.fix[data-pending]");
-    if (a) { e.preventDefault(); toast("The corrections form is not connected yet. It will open a short Google Form."); }
+    if (a) { e.preventDefault(); toast(L("The corrections form is not connected yet. It will open a short Google Form.", "திருத்தப் படிவம் இன்னும் இணைக்கப்படவில்லை.")); }
   });
   updateShare(); updateFix();
 
