@@ -349,6 +349,55 @@
   });
 
 
+  // ---------- Open now ----------
+  // Usual daily hours (India time), kept in step with the timings on each temple page.
+  var HOURS = {
+    thiruparankundram: [["05:00", "13:00"], ["16:00", "21:00"]],
+    thiruchendur: [["04:00", "21:00"]],
+    palani: [["05:45", "20:00"]],
+    swamimalai: [["06:00", "12:30"], ["16:00", "21:00"]],
+    thiruthani: [["05:45", "20:45"]],
+    pazhamudircholai: [["06:00", "18:00"]]
+  };
+  var LAST_ENTRY = { thiruchendur: "19:30" }; // free queue entry stops before the doors close
+  function mins(t) { var p = t.split(":"); return +p[0] * 60 + +p[1]; }
+  function clock(m) { var h = Math.floor(m / 60) % 24, mm = m % 60, ap = h < 12 ? "AM" : "PM"; h = h % 12 || 12; return h + ":" + (mm < 10 ? "0" : "") + mm + " " + ap; }
+  function openStatus(id) {
+    var ist = new Date(Date.now() + 330 * 60000), now = ist.getUTCHours() * 60 + ist.getUTCMinutes(), slots = HOURS[id];
+    for (var i = 0; i < slots.length; i++) {
+      var o = mins(slots[i][0]), c = mins(slots[i][1]);
+      if (now < o) return { cls: "closed", text: i ? "Closed for the afternoon · reopens " + clock(o) : "Closed now · opens " + clock(o) };
+      if (now < c) {
+        var le = LAST_ENTRY[id] ? mins(LAST_ENTRY[id]) : null;
+        if (le !== null && now >= le) return { cls: "soon", text: "Queue closed for today · doors close " + clock(c) };
+        var next = i < slots.length - 1 ? ", reopens " + clock(mins(slots[i + 1][0])) : "";
+        if (c - now <= 60) return { cls: "soon", text: "Closing soon · closes " + clock(c) + next };
+        return { cls: "open", text: "Open now · closes " + clock(c) + next };
+      }
+    }
+    return { cls: "closed", text: "Closed now · opens " + clock(mins(slots[0][0])) + " tomorrow" };
+  }
+  function showStatus() {
+    document.querySelectorAll("[data-status]").forEach(function (el) {
+      var st = openStatus(el.getAttribute("data-status"));
+      el.className = el.className.replace(/\b(open|soon|closed)\b/g, "").trim() + " " + st.cls;
+      el.textContent = st.text;
+    });
+  }
+  if (HOURS[PAGE]) {
+    var factsRow = document.querySelector(".temple-hero .facts");
+    if (factsRow) factsRow.insertAdjacentHTML("afterbegin", '<span class="fact status" data-status="' + PAGE + '"></span>');
+  }
+  document.querySelectorAll(".abode").forEach(function (card) {
+    var id = (card.getAttribute("href") || "").replace(".html", ""), place = card.querySelector(".place");
+    if (HOURS[id] && place) place.insertAdjacentHTML("afterend", '<span class="status" data-status="' + id + '"></span>');
+  });
+  showStatus(); setInterval(showStatus, 60000);
+  if (PAGE === "home" && document.getElementById("abode-list")) {
+    var hd = document.querySelector("#abodes .section-head .quiet");
+    if (hd) hd.insertAdjacentHTML("beforeend", " Open and closed times show the usual daily hours, in India time. Festival days differ.");
+  }
+
   // ---------- Sharing and corrections ----------
   // One setting: the public address comes from the og:url tag in <head>.
   var SITE_URL = (document.querySelector('meta[property="og:url"]') || {}).content || "";

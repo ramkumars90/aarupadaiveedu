@@ -235,3 +235,12 @@ a.fix { color: var(--maroon); font-weight: 500; white-space: nowrap; }
 
 /* Alternative names and spellings */
 .aka { color: var(--muted); font-size: .95rem; margin: 0; }
+
+/* Open now badge */
+.status { display: inline-flex; align-items: flex-start; gap: 7px; font-weight: 700; font-size: .88rem; }
+.status::before { content: ""; width: 9px; height: 9px; border-radius: 50%; background: currentColor; flex-shrink: 0; margin-top: .5em; }
+.status.open { color: var(--leaf); }
+.status.soon { color: #a8520a; }
+.status.closed { color: var(--maroon); }
+.fact.status { background: var(--card); }
+.abode .status { grid-column: 2; justify-self: start; }
