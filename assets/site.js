@@ -398,6 +398,77 @@
     if (hd) hd.insertAdjacentHTML("beforeend", " Open and closed times show the usual daily hours, in India time. Festival days differ.");
   }
 
+  // ---------- Murugan calendar ----------
+  var DAYS = window.MURUGAN_DAYS || [];
+  var MON = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+  var WDAY = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+  function todayIST() { return new Date(Date.now() + 330 * 60000).toISOString().slice(0, 10); }
+  function dayDiff(a, b) { return Math.round((Date.parse(b) - Date.parse(a)) / 86400000); }
+  function nice(iso) { var d = new Date(iso + "T00:00:00Z"); return WDAY[d.getUTCDay()] + " " + d.getUTCDate() + " " + MON[d.getUTCMonth()]; }
+  function when(n) { return n === 0 ? "Today" : n === 1 ? "Tomorrow" : "in " + n + " days"; }
+  function upcoming(n) {
+    var t = todayIST(), out = [];
+    for (var i = 0; i < DAYS.length && out.length < n; i++) if (DAYS[i].date >= t) out.push(DAYS[i]);
+    return out;
+  }
+  // Home page strip
+  var band = document.getElementById("next-day");
+  if (band && DAYS.length) {
+    var nx = upcoming(2), t0 = todayIST();
+    if (nx.length) {
+      var e0 = nx[0], n0 = dayDiff(t0, e0.date);
+      band.querySelector(".wrap").innerHTML = '<span class="next-label">' + (n0 === 0 ? "Today" : "Next Murugan day") + '</span> <b>' + e0.name + '</b> <span lang="ta">' + e0.ta + '</span> · ' + nice(e0.date) + (n0 > 0 ? " · " + when(n0) : "") +
+        ' <a href="calendar.html">See all dates</a>';
+      band.hidden = false;
+    }
+  }
+  // Calendar page
+  var cal = document.getElementById("cal");
+  if (cal) {
+    var t1 = todayIST();
+    cal.querySelectorAll("li.cal-day").forEach(function (li) {
+      var d = li.getAttribute("data-date");
+      if (d < t1) li.classList.add("past");
+      if (d === t1) { li.classList.add("today"); li.querySelector(".cal-name").insertAdjacentHTML("afterbegin", '<span class="today-tag">Today</span> '); }
+    });
+    var nextBox = document.getElementById("cal-next"), up3 = upcoming(3);
+    if (nextBox && up3.length) {
+      nextBox.innerHTML = '<h2 class="cal-next-h">Coming up</h2>' + up3.map(function (e) {
+        var n = dayDiff(t1, e.date);
+        return '<div class="cal-next-item' + (e.major ? " major" : "") + '"><span class="when">' + when(n) + '</span><b>' + e.name + '</b> <span lang="ta">' + e.ta + '</span><span class="date">' + nice(e.date) + '</span></div>';
+      }).join("");
+      nextBox.hidden = false;
+    }
+    function applyFilter(k) {
+      cal.querySelectorAll("li.cal-day").forEach(function (li) {
+        var kind = li.getAttribute("data-kind"), nm = li.querySelector(".cal-name").textContent;
+        var show = k === "all" || kind === k || (k === "sashti" && kind === "sashti-t") ||
+          (k === "krithigai" && /Krithigai|Karthigai/.test(nm) && kind === "festival") ||
+          (k === "sashti" && /Sashti|Soorasamharam/.test(nm) && kind === "festival") ||
+          (k === "visakam" && /Visakam/.test(nm) && kind === "festival");
+        li.hidden = !show || li.classList.contains("past");
+      });
+      cal.querySelectorAll("h3.cal-month").forEach(function (h) {
+        var ol = h.nextElementSibling, any = ol && ol.querySelector("li:not([hidden])");
+        h.hidden = ol.hidden = !any;
+      });
+    }
+    document.querySelectorAll(".chips [data-filter]").forEach(function (b) {
+      b.addEventListener("click", function () {
+        document.querySelectorAll(".chips [data-filter]").forEach(function (x) { x.setAttribute("aria-pressed", x === b ? "true" : "false"); });
+        applyFilter(b.getAttribute("data-filter"));
+      });
+    });
+    applyFilter("all");
+  }
+  document.querySelectorAll("[data-copy]").forEach(function (b) {
+    b.addEventListener("click", function () {
+      var label = b.textContent, url = b.getAttribute("data-copy");
+      function done(m) { b.textContent = m; setTimeout(function () { b.textContent = label; }, 2000); }
+      try { navigator.clipboard.writeText(url).then(function () { done("Link copied"); }, function () { done(url); }); } catch (e) { done(url); }
+    });
+  });
+
   // ---------- Sharing and corrections ----------
   // One setting: the public address comes from the og:url tag in <head>.
   var SITE_URL = (document.querySelector('meta[property="og:url"]') || {}).content || "";

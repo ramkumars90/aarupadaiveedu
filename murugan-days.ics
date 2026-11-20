@@ -1,0 +1,798 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Aaru Padai//Murugan calendar//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:Murugan days · Aaru Padai
+X-WR-CALDESC:Krithigai\, Sashti\, Visakam and Murugan festivals\, from aaru
+ padaiveedu.in
+X-WR-TIMEZONE:Asia/Kolkata
+REFRESH-INTERVAL;VALUE=DURATION:P1D
+X-PUBLISHED-TTL:P1D
+BEGIN:VEVENT
+UID:2026-11-24-festival-karthigaideepam@aarupadaiveedu.in
+DTSTAMP:20261119T160259Z
+DTSTART;VALUE=DATE:20261124
+DTEND;VALUE=DATE:20261125
+SUMMARY:Karthigai Deepam · கார்த்திகை தீபம்
+DESCRIPTION:Krithigai in the month of Karthigai. Lamps are lit at dusk in e
+ very home and on the temple hills\, including the maha deepam at Thirupara
+ nkundram. Dates follow the Tamil panchangam for Chennai\; temples may diff
+ er by a day. https://aarupadaiveedu.in/calendar
+URL:https://aarupadaiveedu.in/calendar
+TRANSP:TRANSPARENT
+CATEGORIES:Festival
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-11-29-sashti-t-theipiraisashti@aarupadaiveedu.in
+DTSTAMP:20261119T160259Z
+DTSTART;VALUE=DATE:20261129
+DTEND;VALUE=DATE:20261130
+SUMMARY:Theipirai Sashti · தேய்பிறை சஷ்டி
+DESCRIPTION:The sixth day after the full moon (theipirai). Some devotees fa
+ st on this Sashti too. Dates follow the Tamil panchangam for Chennai\; tem
+ ples may differ by a day. https://aarupadaiveedu.in/calendar
+URL:https://aarupadaiveedu.in/calendar
+TRANSP:TRANSPARENT
+CATEGORIES:Monthly
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-12-07-visakam-visakam@aarupadaiveedu.in
+DTSTAMP:20261119T160259Z
+DTSTART;VALUE=DATE:20261207
+DTEND;VALUE=DATE:20261208
+SUMMARY:Visakam · விசாகம்
+DESCRIPTION:Murugan's birth star. Dates follow the Tamil panchangam for Che
+ nnai\; temples may differ by a day. https://aarupadaiveedu.in/calendar
+URL:https://aarupadaiveedu.in/calendar
+TRANSP:TRANSPARENT
+CATEGORIES:Monthly
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-12-15-sashti-sashti@aarupadaiveedu.in
+DTSTAMP:20261119T160259Z
+DTSTART;VALUE=DATE:20261215
+DTEND;VALUE=DATE:20261216
+SUMMARY:Sashti · வளர்பிறை சஷ்டி
+DESCRIPTION:Sashti fast on the sixth day after the new moon (valarpirai). D
+ ates follow the Tamil panchangam for Chennai\; temples may differ by a day
+ . https://aarupadaiveedu.in/calendar
+URL:https://aarupadaiveedu.in/calendar
+TRANSP:TRANSPARENT
+CATEGORIES:Monthly
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-12-21-krithigai-krithigai@aarupadaiveedu.in
+DTSTAMP:20261119T160259Z
+DTSTART;VALUE=DATE:20261221
+DTEND;VALUE=DATE:20261222
+SUMMARY:Krithigai · கிருத்திகை
+DESCRIPTION:Murugan's star. Many devotees fast and light a lamp at dusk. Da
+ tes follow the Tamil panchangam for Chennai\; temples may differ by a day.
+  https://aarupadaiveedu.in/calendar
+URL:https://aarupadaiveedu.in/calendar
+TRANSP:TRANSPARENT
+CATEGORIES:Monthly
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-12-29-sashti-t-theipiraisashti@aarupadaiveedu.in
+DTSTAMP:20261119T160259Z
+DTSTART;VALUE=DATE:20261229
+DTEND;VALUE=DATE:20261230
+SUMMARY:Theipirai Sashti · தேய்பிறை சஷ்டி
+DESCRIPTION:The sixth day after the full moon (theipirai). Some devotees fa
+ st on this Sashti too. Dates follow the Tamil panchangam for Chennai\; tem
+ ples may differ by a day. https://aarupadaiveedu.in/calendar
+URL:https://aarupadaiveedu.in/calendar
+TRANSP:TRANSPARENT
+CATEGORIES:Monthly
+END:VEVENT
+BEGIN:VEVENT
+UID:2027-01-03-visakam-visakam@aarupadaiveedu.in
+DTSTAMP:20261119T160259Z
+DTSTART;VALUE=DATE:20270103
+DTEND;VALUE=DATE:20270104
+SUMMARY:Visakam · விசாகம்
+DESCRIPTION:Murugan's birth star. Dates follow the Tamil panchangam for Che
+ nnai\; temples may differ by a day. https://aarupadaiveedu.in/calendar
+URL:https://aarupadaiveedu.in/calendar
+TRANSP:TRANSPARENT
+CATEGORIES:Monthly
+END:VEVENT
+BEGIN:VEVENT
+UID:2027-01-14-sashti-sashti@aarupadaiveedu.in
+DTSTAMP:20261119T160259Z
+DTSTART;VALUE=DATE:20270114
+DTEND;VALUE=DATE:20270115
+SUMMARY:Sashti · வளர்பிறை சஷ்டி
+DESCRIPTION:Sashti fast on the sixth day after the new moon (valarpirai). D
+ ates follow the Tamil panchangam for Chennai\; temples may differ by a day
+ . https://aarupadaiveedu.in/calendar
+URL:https://aarupadaiveedu.in/calendar
+TRANSP:TRANSPARENT
+CATEGORIES:Monthly
+END:VEVENT
+BEGIN:VEVENT
+UID:2027-01-18-festival-thaikrithigai@aarupadaiveedu.in
+DTSTAMP:20261119T160259Z
+DTSTART;VALUE=DATE:20270118
+DTEND;VALUE=DATE:20270119
+SUMMARY:Thai Krithigai · தைக் கிருத்திகை
+DESCRIPTION:Krithigai in the month of Thai\, one of the three great Krithig
+ ais. Dates follow the Tamil panchangam for Chennai\; temples may differ by
+  a day. https://aarupadaiveedu.in/calendar
+URL:https://aarupadaiveedu.in/calendar
+TRANSP:TRANSPARENT
+CATEGORIES:Festival
+END:VEVENT
+BEGIN:VEVENT
+UID:2027-01-22-festival-thaipoosam@aarupadaiveedu.in
+DTSTAMP:20261119T160259Z
+DTSTART;VALUE=DATE:20270122
+DTEND;VALUE=DATE:20270123
+SUMMARY:Thaipoosam · தைப்பூசம்
+DESCRIPTION:Poosam star in the month of Thai. The biggest day at Palani\, w
+ ith kavadi processions at all six abodes. Dates follow the Tamil panchanga
+ m for Chennai\; temples may differ by a day. https://aarupadaiveedu.in/cal
+ endar
+URL:https://aarupadaiveedu.in/calendar
+TRANSP:TRANSPARENT
+CATEGORIES:Festival
+END:VEVENT
+BEGIN:VEVENT
+UID:2027-01-27-sashti-t-theipiraisashti@aarupadaiveedu.in
+DTSTAMP:20261119T160259Z
+DTSTART;VALUE=DATE:20270127
+DTEND;VALUE=DATE:20270128
+SUMMARY:Theipirai Sashti · தேய்பிறை சஷ்டி
+DESCRIPTION:The sixth day after the full moon (theipirai). Some devotees fa
+ st on this Sashti too. Dates follow the Tamil panchangam for Chennai\; tem
+ ples may differ by a day. https://aarupadaiveedu.in/calendar
+URL:https://aarupadaiveedu.in/calendar
+TRANSP:TRANSPARENT
+CATEGORIES:Monthly
+END:VEVENT
+BEGIN:VEVENT
+UID:2027-01-30-visakam-visakam@aarupadaiveedu.in
+DTSTAMP:20261119T160259Z
+DTSTART;VALUE=DATE:20270130
+DTEND;VALUE=DATE:20270131
+SUMMARY:Visakam · விசாகம்
+DESCRIPTION:Murugan's birth star. Dates follow the Tamil panchangam for Che
+ nnai\; temples may differ by a day. https://aarupadaiveedu.in/calendar
+URL:https://aarupadaiveedu.in/calendar
+TRANSP:TRANSPARENT
+CATEGORIES:Monthly
+END:VEVENT
+BEGIN:VEVENT
+UID:2027-02-12-sashti-sashti@aarupadaiveedu.in
+DTSTAMP:20261119T160259Z
+DTSTART;VALUE=DATE:20270212
+DTEND;VALUE=DATE:20270213
+SUMMARY:Sashti · வளர்பிறை சஷ்டி
+DESCRIPTION:Sashti fast on the sixth day after the new moon (valarpirai). D
+ ates follow the Tamil panchangam for Chennai\; temples may differ by a day
+ . https://aarupadaiveedu.in/calendar
+URL:https://aarupadaiveedu.in/calendar
+TRANSP:TRANSPARENT
+CATEGORIES:Monthly
+END:VEVENT
+BEGIN:VEVENT
+UID:2027-02-14-krithigai-krithigai@aarupadaiveedu.in
+DTSTAMP:20261119T160259Z
+DTSTART;VALUE=DATE:20270214
+DTEND;VALUE=DATE:20270215
+SUMMARY:Krithigai · கிருத்திகை
+DESCRIPTION:Murugan's star. Many devotees fast and light a lamp at dusk. Da
+ tes follow the Tamil panchangam for Chennai\; temples may differ by a day.
+  https://aarupadaiveedu.in/calendar
+URL:https://aarupadaiveedu.in/calendar
+TRANSP:TRANSPARENT
+CATEGORIES:Monthly
+END:VEVENT
+BEGIN:VEVENT
+UID:2027-02-26-visakam-visakam@aarupadaiveedu.in
+DTSTAMP:20261119T160259Z
+DTSTART;VALUE=DATE:20270226
+DTEND;VALUE=DATE:20270227
+SUMMARY:Visakam · விசாகம்
+DESCRIPTION:Murugan's birth star. Dates follow the Tamil panchangam for Che
+ nnai\; temples may differ by a day. https://aarupadaiveedu.in/calendar
+URL:https://aarupadaiveedu.in/calendar
+TRANSP:TRANSPARENT
+CATEGORIES:Monthly
+END:VEVENT
+BEGIN:VEVENT
+UID:2027-02-26-sashti-t-theipiraisashti@aarupadaiveedu.in
+DTSTAMP:20261119T160259Z
+DTSTART;VALUE=DATE:20270226
+DTEND;VALUE=DATE:20270227
+SUMMARY:Theipirai Sashti · தேய்பிறை சஷ்டி
+DESCRIPTION:The sixth day after the full moon (theipirai). Some devotees fa
+ st on this Sashti too. Dates follow the Tamil panchangam for Chennai\; tem
+ ples may differ by a day. https://aarupadaiveedu.in/calendar
+URL:https://aarupadaiveedu.in/calendar
+TRANSP:TRANSPARENT
+CATEGORIES:Monthly
+END:VEVENT
+BEGIN:VEVENT
+UID:2027-03-13-krithigai-krithigai@aarupadaiveedu.in
+DTSTAMP:20261119T160259Z
+DTSTART;VALUE=DATE:20270313
+DTEND;VALUE=DATE:20270314
+SUMMARY:Krithigai · கிருத்திகை
+DESCRIPTION:Murugan's star. Many devotees fast and light a lamp at dusk. Da
+ tes follow the Tamil panchangam for Chennai\; temples may differ by a day.
+  https://aarupadaiveedu.in/calendar
+URL:https://aarupadaiveedu.in/calendar
+TRANSP:TRANSPARENT
+CATEGORIES:Monthly
+END:VEVENT
+BEGIN:VEVENT
+UID:2027-03-14-sashti-sashti@aarupadaiveedu.in
+DTSTAMP:20261119T160259Z
+DTSTART;VALUE=DATE:20270314
+DTEND;VALUE=DATE:20270315
+SUMMARY:Sashti · வளர்பிறை சஷ்டி
+DESCRIPTION:Sashti fast on the sixth day after the new moon (valarpirai). D
+ ates follow the Tamil panchangam for Chennai\; temples may differ by a day
+ . https://aarupadaiveedu.in/calendar
+URL:https://aarupadaiveedu.in/calendar
+TRANSP:TRANSPARENT
+CATEGORIES:Monthly
+END:VEVENT
+BEGIN:VEVENT
+UID:2027-03-22-festival-panguniuthiram@aarupadaiveedu.in
+DTSTAMP:20261119T160259Z
+DTSTART;VALUE=DATE:20270322
+DTEND;VALUE=DATE:20270323
+SUMMARY:Panguni Uthiram · பங்குனி உத்திரம்
+DESCRIPTION:Uthiram star in the month of Panguni\, the day of divine weddin
+ gs. Palani holds a ten-day festival. Dates follow the Tamil panchangam for
+  Chennai\; temples may differ by a day. https://aarupadaiveedu.in/calendar
+URL:https://aarupadaiveedu.in/calendar
+TRANSP:TRANSPARENT
+CATEGORIES:Festival
+END:VEVENT
+BEGIN:VEVENT
+UID:2027-03-26-visakam-visakam@aarupadaiveedu.in
+DTSTAMP:20261119T160259Z
+DTSTART;VALUE=DATE:20270326
+DTEND;VALUE=DATE:20270327
+SUMMARY:Visakam · விசாகம்
+DESCRIPTION:Murugan's birth star. Dates follow the Tamil panchangam for Che
+ nnai\; temples may differ by a day. https://aarupadaiveedu.in/calendar
+URL:https://aarupadaiveedu.in/calendar
+TRANSP:TRANSPARENT
+CATEGORIES:Monthly
+END:VEVENT
+BEGIN:VEVENT
+UID:2027-03-28-sashti-t-theipiraisashti@aarupadaiveedu.in
+DTSTAMP:20261119T160259Z
+DTSTART;VALUE=DATE:20270328
+DTEND;VALUE=DATE:20270329
+SUMMARY:Theipirai Sashti · தேய்பிறை சஷ்டி
+DESCRIPTION:The sixth day after the full moon (theipirai). Some devotees fa
+ st on this Sashti too. Dates follow the Tamil panchangam for Chennai\; tem
+ ples may differ by a day. https://aarupadaiveedu.in/calendar
+URL:https://aarupadaiveedu.in/calendar
+TRANSP:TRANSPARENT
+CATEGORIES:Monthly
+END:VEVENT
+BEGIN:VEVENT
+UID:2027-04-09-krithigai-krithigai@aarupadaiveedu.in
+DTSTAMP:20261119T160259Z
+DTSTART;VALUE=DATE:20270409
+DTEND;VALUE=DATE:20270410
+SUMMARY:Krithigai · கிருத்திகை
+DESCRIPTION:Murugan's star. Many devotees fast and light a lamp at dusk. Da
+ tes follow the Tamil panchangam for Chennai\; temples may differ by a day.
+  https://aarupadaiveedu.in/calendar
+URL:https://aarupadaiveedu.in/calendar
+TRANSP:TRANSPARENT
+CATEGORIES:Monthly
+END:VEVENT
+BEGIN:VEVENT
+UID:2027-04-12-sashti-sashti@aarupadaiveedu.in
+DTSTAMP:20261119T160259Z
+DTSTART;VALUE=DATE:20270412
+DTEND;VALUE=DATE:20270413
+SUMMARY:Sashti · வளர்பிறை சஷ்டி
+DESCRIPTION:Sashti fast on the sixth day after the new moon (valarpirai). D
+ ates follow the Tamil panchangam for Chennai\; temples may differ by a day
+ . https://aarupadaiveedu.in/calendar
+URL:https://aarupadaiveedu.in/calendar
+TRANSP:TRANSPARENT
+CATEGORIES:Monthly
+END:VEVENT
+BEGIN:VEVENT
+UID:2027-04-22-visakam-visakam@aarupadaiveedu.in
+DTSTAMP:20261119T160259Z
+DTSTART;VALUE=DATE:20270422
+DTEND;VALUE=DATE:20270423
+SUMMARY:Visakam · விசாகம்
+DESCRIPTION:Murugan's birth star. Dates follow the Tamil panchangam for Che
+ nnai\; temples may differ by a day. https://aarupadaiveedu.in/calendar
+URL:https://aarupadaiveedu.in/calendar
+TRANSP:TRANSPARENT
+CATEGORIES:Monthly
+END:VEVENT
+BEGIN:VEVENT
+UID:2027-04-26-sashti-t-theipiraisashti@aarupadaiveedu.in
+DTSTAMP:20261119T160259Z
+DTSTART;VALUE=DATE:20270426
+DTEND;VALUE=DATE:20270427
+SUMMARY:Theipirai Sashti · தேய்பிறை சஷ்டி
+DESCRIPTION:The sixth day after the full moon (theipirai). Some devotees fa
+ st on this Sashti too. Dates follow the Tamil panchangam for Chennai\; tem
+ ples may differ by a day. https://aarupadaiveedu.in/calendar
+URL:https://aarupadaiveedu.in/calendar
+TRANSP:TRANSPARENT
+CATEGORIES:Monthly
+END:VEVENT
+BEGIN:VEVENT
+UID:2027-05-07-krithigai-krithigai@aarupadaiveedu.in
+DTSTAMP:20261119T160259Z
+DTSTART;VALUE=DATE:20270507
+DTEND;VALUE=DATE:20270508
+SUMMARY:Krithigai · கிருத்திகை
+DESCRIPTION:Murugan's star. Many devotees fast and light a lamp at dusk. Da
+ tes follow the Tamil panchangam for Chennai\; temples may differ by a day.
+  https://aarupadaiveedu.in/calendar
+URL:https://aarupadaiveedu.in/calendar
+TRANSP:TRANSPARENT
+CATEGORIES:Monthly
+END:VEVENT
+BEGIN:VEVENT
+UID:2027-05-11-sashti-sashti@aarupadaiveedu.in
+DTSTAMP:20261119T160259Z
+DTSTART;VALUE=DATE:20270511
+DTEND;VALUE=DATE:20270512
+SUMMARY:Sashti · வளர்பிறை சஷ்டி
+DESCRIPTION:Sashti fast on the sixth day after the new moon (valarpirai). D
+ ates follow the Tamil panchangam for Chennai\; temples may differ by a day
+ . https://aarupadaiveedu.in/calendar
+URL:https://aarupadaiveedu.in/calendar
+TRANSP:TRANSPARENT
+CATEGORIES:Monthly
+END:VEVENT
+BEGIN:VEVENT
+UID:2027-05-20-festival-vaikasivisakam@aarupadaiveedu.in
+DTSTAMP:20261119T160259Z
+DTSTART;VALUE=DATE:20270520
+DTEND;VALUE=DATE:20270521
+SUMMARY:Vaikasi Visakam · வைகாசி விசாகம்
+DESCRIPTION:Murugan's birth star in the month of Vaikasi. Big celebrations 
+ at Thiruchendur and Thiruparankundram. Dates follow the Tamil panchangam f
+ or Chennai\; temples may differ by a day. https://aarupadaiveedu.in/calend
+ ar
+URL:https://aarupadaiveedu.in/calendar
+TRANSP:TRANSPARENT
+CATEGORIES:Festival
+END:VEVENT
+BEGIN:VEVENT
+UID:2027-05-26-sashti-t-theipiraisashti@aarupadaiveedu.in
+DTSTAMP:20261119T160259Z
+DTSTART;VALUE=DATE:20270526
+DTEND;VALUE=DATE:20270527
+SUMMARY:Theipirai Sashti · தேய்பிறை சஷ்டி
+DESCRIPTION:The sixth day after the full moon (theipirai). Some devotees fa
+ st on this Sashti too. Dates follow the Tamil panchangam for Chennai\; tem
+ ples may differ by a day. https://aarupadaiveedu.in/calendar
+URL:https://aarupadaiveedu.in/calendar
+TRANSP:TRANSPARENT
+CATEGORIES:Monthly
+END:VEVENT
+BEGIN:VEVENT
+UID:2027-06-03-krithigai-krithigai@aarupadaiveedu.in
+DTSTAMP:20261119T160259Z
+DTSTART;VALUE=DATE:20270603
+DTEND;VALUE=DATE:20270604
+SUMMARY:Krithigai · கிருத்திகை
+DESCRIPTION:Murugan's star. Many devotees fast and light a lamp at dusk. Da
+ tes follow the Tamil panchangam for Chennai\; temples may differ by a day.
+  https://aarupadaiveedu.in/calendar
+URL:https://aarupadaiveedu.in/calendar
+TRANSP:TRANSPARENT
+CATEGORIES:Monthly
+END:VEVENT
+BEGIN:VEVENT
+UID:2027-06-09-sashti-sashti@aarupadaiveedu.in
+DTSTAMP:20261119T160259Z
+DTSTART;VALUE=DATE:20270609
+DTEND;VALUE=DATE:20270610
+SUMMARY:Sashti · வளர்பிறை சஷ்டி
+DESCRIPTION:Sashti fast on the sixth day after the new moon (valarpirai). D
+ ates follow the Tamil panchangam for Chennai\; temples may differ by a day
+ . https://aarupadaiveedu.in/calendar
+URL:https://aarupadaiveedu.in/calendar
+TRANSP:TRANSPARENT
+CATEGORIES:Monthly
+END:VEVENT
+BEGIN:VEVENT
+UID:2027-06-16-visakam-visakam@aarupadaiveedu.in
+DTSTAMP:20261119T160259Z
+DTSTART;VALUE=DATE:20270616
+DTEND;VALUE=DATE:20270617
+SUMMARY:Visakam · விசாகம்
+DESCRIPTION:Murugan's birth star. Dates follow the Tamil panchangam for Che
+ nnai\; temples may differ by a day. https://aarupadaiveedu.in/calendar
+URL:https://aarupadaiveedu.in/calendar
+TRANSP:TRANSPARENT
+CATEGORIES:Monthly
+END:VEVENT
+BEGIN:VEVENT
+UID:2027-06-25-sashti-t-theipiraisashti@aarupadaiveedu.in
+DTSTAMP:20261119T160259Z
+DTSTART;VALUE=DATE:20270625
+DTEND;VALUE=DATE:20270626
+SUMMARY:Theipirai Sashti · தேய்பிறை சஷ்டி
+DESCRIPTION:The sixth day after the full moon (theipirai). Some devotees fa
+ st on this Sashti too. Dates follow the Tamil panchangam for Chennai\; tem
+ ples may differ by a day. https://aarupadaiveedu.in/calendar
+URL:https://aarupadaiveedu.in/calendar
+TRANSP:TRANSPARENT
+CATEGORIES:Monthly
+END:VEVENT
+BEGIN:VEVENT
+UID:2027-07-01-krithigai-krithigai@aarupadaiveedu.in
+DTSTAMP:20261119T160259Z
+DTSTART;VALUE=DATE:20270701
+DTEND;VALUE=DATE:20270702
+SUMMARY:Krithigai · கிருத்திகை
+DESCRIPTION:Murugan's star. Many devotees fast and light a lamp at dusk. Da
+ tes follow the Tamil panchangam for Chennai\; temples may differ by a day.
+  https://aarupadaiveedu.in/calendar
+URL:https://aarupadaiveedu.in/calendar
+TRANSP:TRANSPARENT
+CATEGORIES:Monthly
+END:VEVENT
+BEGIN:VEVENT
+UID:2027-07-09-sashti-sashti@aarupadaiveedu.in
+DTSTAMP:20261119T160259Z
+DTSTART;VALUE=DATE:20270709
+DTEND;VALUE=DATE:20270710
+SUMMARY:Sashti · வளர்பிறை சஷ்டி
+DESCRIPTION:Sashti fast on the sixth day after the new moon (valarpirai). D
+ ates follow the Tamil panchangam for Chennai\; temples may differ by a day
+ . https://aarupadaiveedu.in/calendar
+URL:https://aarupadaiveedu.in/calendar
+TRANSP:TRANSPARENT
+CATEGORIES:Monthly
+END:VEVENT
+BEGIN:VEVENT
+UID:2027-07-13-visakam-visakam@aarupadaiveedu.in
+DTSTAMP:20261119T160259Z
+DTSTART;VALUE=DATE:20270713
+DTEND;VALUE=DATE:20270714
+SUMMARY:Visakam · விசாகம்
+DESCRIPTION:Murugan's birth star. Dates follow the Tamil panchangam for Che
+ nnai\; temples may differ by a day. https://aarupadaiveedu.in/calendar
+URL:https://aarupadaiveedu.in/calendar
+TRANSP:TRANSPARENT
+CATEGORIES:Monthly
+END:VEVENT
+BEGIN:VEVENT
+UID:2027-07-24-sashti-t-theipiraisashti@aarupadaiveedu.in
+DTSTAMP:20261119T160259Z
+DTSTART;VALUE=DATE:20270724
+DTEND;VALUE=DATE:20270725
+SUMMARY:Theipirai Sashti · தேய்பிறை சஷ்டி
+DESCRIPTION:The sixth day after the full moon (theipirai). Some devotees fa
+ st on this Sashti too. Dates follow the Tamil panchangam for Chennai\; tem
+ ples may differ by a day. https://aarupadaiveedu.in/calendar
+URL:https://aarupadaiveedu.in/calendar
+TRANSP:TRANSPARENT
+CATEGORIES:Monthly
+END:VEVENT
+BEGIN:VEVENT
+UID:2027-07-28-festival-aadikrithigai@aarupadaiveedu.in
+DTSTAMP:20261119T160259Z
+DTSTART;VALUE=DATE:20270728
+DTEND;VALUE=DATE:20270729
+SUMMARY:Aadi Krithigai · ஆடிக் கிருத்திகை
+DESCRIPTION:Krithigai in the month of Aadi\, one of the three great Krithig
+ ais. Thiruthani holds its float festival. Dates follow the Tamil panchanga
+ m for Chennai\; temples may differ by a day. https://aarupadaiveedu.in/cal
+ endar
+URL:https://aarupadaiveedu.in/calendar
+TRANSP:TRANSPARENT
+CATEGORIES:Festival
+END:VEVENT
+BEGIN:VEVENT
+UID:2027-08-07-sashti-sashti@aarupadaiveedu.in
+DTSTAMP:20261119T160259Z
+DTSTART;VALUE=DATE:20270807
+DTEND;VALUE=DATE:20270808
+SUMMARY:Sashti · வளர்பிறை சஷ்டி
+DESCRIPTION:Sashti fast on the sixth day after the new moon (valarpirai). D
+ ates follow the Tamil panchangam for Chennai\; temples may differ by a day
+ . https://aarupadaiveedu.in/calendar
+URL:https://aarupadaiveedu.in/calendar
+TRANSP:TRANSPARENT
+CATEGORIES:Monthly
+END:VEVENT
+BEGIN:VEVENT
+UID:2027-08-09-visakam-visakam@aarupadaiveedu.in
+DTSTAMP:20261119T160259Z
+DTSTART;VALUE=DATE:20270809
+DTEND;VALUE=DATE:20270810
+SUMMARY:Visakam · விசாகம்
+DESCRIPTION:Murugan's birth star. Dates follow the Tamil panchangam for Che
+ nnai\; temples may differ by a day. https://aarupadaiveedu.in/calendar
+URL:https://aarupadaiveedu.in/calendar
+TRANSP:TRANSPARENT
+CATEGORIES:Monthly
+END:VEVENT
+BEGIN:VEVENT
+UID:2027-08-23-sashti-t-theipiraisashti@aarupadaiveedu.in
+DTSTAMP:20261119T160259Z
+DTSTART;VALUE=DATE:20270823
+DTEND;VALUE=DATE:20270824
+SUMMARY:Theipirai Sashti · தேய்பிறை சஷ்டி
+DESCRIPTION:The sixth day after the full moon (theipirai). Some devotees fa
+ st on this Sashti too. Dates follow the Tamil panchangam for Chennai\; tem
+ ples may differ by a day. https://aarupadaiveedu.in/calendar
+URL:https://aarupadaiveedu.in/calendar
+TRANSP:TRANSPARENT
+CATEGORIES:Monthly
+END:VEVENT
+BEGIN:VEVENT
+UID:2027-08-24-krithigai-krithigai@aarupadaiveedu.in
+DTSTAMP:20261119T160259Z
+DTSTART;VALUE=DATE:20270824
+DTEND;VALUE=DATE:20270825
+SUMMARY:Krithigai · கிருத்திகை
+DESCRIPTION:Murugan's star. Many devotees fast and light a lamp at dusk. Da
+ tes follow the Tamil panchangam for Chennai\; temples may differ by a day.
+  https://aarupadaiveedu.in/calendar
+URL:https://aarupadaiveedu.in/calendar
+TRANSP:TRANSPARENT
+CATEGORIES:Monthly
+END:VEVENT
+BEGIN:VEVENT
+UID:2027-09-05-sashti-sashti@aarupadaiveedu.in
+DTSTAMP:20261119T160259Z
+DTSTART;VALUE=DATE:20270905
+DTEND;VALUE=DATE:20270906
+SUMMARY:Sashti · வளர்பிறை சஷ்டி
+DESCRIPTION:Sashti fast on the sixth day after the new moon (valarpirai). D
+ ates follow the Tamil panchangam for Chennai\; temples may differ by a day
+ . https://aarupadaiveedu.in/calendar
+URL:https://aarupadaiveedu.in/calendar
+TRANSP:TRANSPARENT
+CATEGORIES:Monthly
+END:VEVENT
+BEGIN:VEVENT
+UID:2027-09-06-visakam-visakam@aarupadaiveedu.in
+DTSTAMP:20261119T160259Z
+DTSTART;VALUE=DATE:20270906
+DTEND;VALUE=DATE:20270907
+SUMMARY:Visakam · விசாகம்
+DESCRIPTION:Murugan's birth star. Dates follow the Tamil panchangam for Che
+ nnai\; temples may differ by a day. https://aarupadaiveedu.in/calendar
+URL:https://aarupadaiveedu.in/calendar
+TRANSP:TRANSPARENT
+CATEGORIES:Monthly
+END:VEVENT
+BEGIN:VEVENT
+UID:2027-09-21-krithigai-krithigai@aarupadaiveedu.in
+DTSTAMP:20261119T160259Z
+DTSTART;VALUE=DATE:20270921
+DTEND;VALUE=DATE:20270922
+SUMMARY:Krithigai · கிருத்திகை
+DESCRIPTION:Murugan's star. Many devotees fast and light a lamp at dusk. Da
+ tes follow the Tamil panchangam for Chennai\; temples may differ by a day.
+  https://aarupadaiveedu.in/calendar
+URL:https://aarupadaiveedu.in/calendar
+TRANSP:TRANSPARENT
+CATEGORIES:Monthly
+END:VEVENT
+BEGIN:VEVENT
+UID:2027-09-21-sashti-t-theipiraisashti@aarupadaiveedu.in
+DTSTAMP:20261119T160259Z
+DTSTART;VALUE=DATE:20270921
+DTEND;VALUE=DATE:20270922
+SUMMARY:Theipirai Sashti · தேய்பிறை சஷ்டி
+DESCRIPTION:The sixth day after the full moon (theipirai). Some devotees fa
+ st on this Sashti too. Dates follow the Tamil panchangam for Chennai\; tem
+ ples may differ by a day. https://aarupadaiveedu.in/calendar
+URL:https://aarupadaiveedu.in/calendar
+TRANSP:TRANSPARENT
+CATEGORIES:Monthly
+END:VEVENT
+BEGIN:VEVENT
+UID:2027-10-03-visakam-visakam@aarupadaiveedu.in
+DTSTAMP:20261119T160259Z
+DTSTART;VALUE=DATE:20271003
+DTEND;VALUE=DATE:20271004
+SUMMARY:Visakam · விசாகம்
+DESCRIPTION:Murugan's birth star. Dates follow the Tamil panchangam for Che
+ nnai\; temples may differ by a day. https://aarupadaiveedu.in/calendar
+URL:https://aarupadaiveedu.in/calendar
+TRANSP:TRANSPARENT
+CATEGORIES:Monthly
+END:VEVENT
+BEGIN:VEVENT
+UID:2027-10-05-sashti-sashti@aarupadaiveedu.in
+DTSTAMP:20261119T160259Z
+DTSTART;VALUE=DATE:20271005
+DTEND;VALUE=DATE:20271006
+SUMMARY:Sashti · வளர்பிறை சஷ்டி
+DESCRIPTION:Sashti fast on the sixth day after the new moon (valarpirai). D
+ ates follow the Tamil panchangam for Chennai\; temples may differ by a day
+ . https://aarupadaiveedu.in/calendar
+URL:https://aarupadaiveedu.in/calendar
+TRANSP:TRANSPARENT
+CATEGORIES:Monthly
+END:VEVENT
+BEGIN:VEVENT
+UID:2027-10-18-krithigai-krithigai@aarupadaiveedu.in
+DTSTAMP:20261119T160259Z
+DTSTART;VALUE=DATE:20271018
+DTEND;VALUE=DATE:20271019
+SUMMARY:Krithigai · கிருத்திகை
+DESCRIPTION:Murugan's star. Many devotees fast and light a lamp at dusk. Da
+ tes follow the Tamil panchangam for Chennai\; temples may differ by a day.
+  https://aarupadaiveedu.in/calendar
+URL:https://aarupadaiveedu.in/calendar
+TRANSP:TRANSPARENT
+CATEGORIES:Monthly
+END:VEVENT
+BEGIN:VEVENT
+UID:2027-10-21-sashti-t-theipiraisashti@aarupadaiveedu.in
+DTSTAMP:20261119T160259Z
+DTSTART;VALUE=DATE:20271021
+DTEND;VALUE=DATE:20271022
+SUMMARY:Theipirai Sashti · தேய்பிறை சஷ்டி
+DESCRIPTION:The sixth day after the full moon (theipirai). Some devotees fa
+ st on this Sashti too. Dates follow the Tamil panchangam for Chennai\; tem
+ ples may differ by a day. https://aarupadaiveedu.in/calendar
+URL:https://aarupadaiveedu.in/calendar
+TRANSP:TRANSPARENT
+CATEGORIES:Monthly
+END:VEVENT
+BEGIN:VEVENT
+UID:2027-10-30-festival-kandasashtibegins@aarupadaiveedu.in
+DTSTAMP:20261119T160259Z
+DTSTART;VALUE=DATE:20271030
+DTEND;VALUE=DATE:20271031
+SUMMARY:Kanda Sashti begins · கந்த சஷ்டி தொடக்
+ கம்
+DESCRIPTION:Six days of fasting and prayer begin. Thiruchendur is the centr
+ e of the festival. Dates follow the Tamil panchangam for Chennai\; temples
+  may differ by a day. https://aarupadaiveedu.in/calendar
+URL:https://aarupadaiveedu.in/calendar
+TRANSP:TRANSPARENT
+CATEGORIES:Festival
+END:VEVENT
+BEGIN:VEVENT
+UID:2027-10-30-visakam-visakam@aarupadaiveedu.in
+DTSTAMP:20261119T160259Z
+DTSTART;VALUE=DATE:20271030
+DTEND;VALUE=DATE:20271031
+SUMMARY:Visakam · விசாகம்
+DESCRIPTION:Murugan's birth star. Dates follow the Tamil panchangam for Che
+ nnai\; temples may differ by a day. https://aarupadaiveedu.in/calendar
+URL:https://aarupadaiveedu.in/calendar
+TRANSP:TRANSPARENT
+CATEGORIES:Monthly
+END:VEVENT
+BEGIN:VEVENT
+UID:2027-11-04-festival-soorasamharam@aarupadaiveedu.in
+DTSTAMP:20261119T160259Z
+DTSTART;VALUE=DATE:20271104
+DTEND;VALUE=DATE:20271105
+SUMMARY:Soorasamharam · சூரசம்ஹாரம்
+DESCRIPTION:The sixth day of Kanda Sashti. In the evening Murugan defeats S
+ oorapadman on the shore at Thiruchendur. Dates follow the Tamil panchangam
+  for Chennai\; temples may differ by a day. https://aarupadaiveedu.in/cale
+ ndar
+URL:https://aarupadaiveedu.in/calendar
+TRANSP:TRANSPARENT
+CATEGORIES:Festival
+END:VEVENT
+BEGIN:VEVENT
+UID:2027-11-05-festival-thirukalyanam@aarupadaiveedu.in
+DTSTAMP:20261119T160259Z
+DTSTART;VALUE=DATE:20271105
+DTEND;VALUE=DATE:20271106
+SUMMARY:Thirukalyanam · திருக்கல்யாணம்
+DESCRIPTION:Murugan's wedding with Deivanai\, the day after Soorasamharam. 
+ Dates follow the Tamil panchangam for Chennai\; temples may differ by a da
+ y. https://aarupadaiveedu.in/calendar
+URL:https://aarupadaiveedu.in/calendar
+TRANSP:TRANSPARENT
+CATEGORIES:Festival
+END:VEVENT
+BEGIN:VEVENT
+UID:2027-11-14-krithigai-krithigai@aarupadaiveedu.in
+DTSTAMP:20261119T160259Z
+DTSTART;VALUE=DATE:20271114
+DTEND;VALUE=DATE:20271115
+SUMMARY:Krithigai · கிருத்திகை
+DESCRIPTION:Murugan's star. Many devotees fast and light a lamp at dusk. Da
+ tes follow the Tamil panchangam for Chennai\; temples may differ by a day.
+  https://aarupadaiveedu.in/calendar
+URL:https://aarupadaiveedu.in/calendar
+TRANSP:TRANSPARENT
+CATEGORIES:Monthly
+END:VEVENT
+BEGIN:VEVENT
+UID:2027-11-19-sashti-t-theipiraisashti@aarupadaiveedu.in
+DTSTAMP:20261119T160259Z
+DTSTART;VALUE=DATE:20271119
+DTEND;VALUE=DATE:20271120
+SUMMARY:Theipirai Sashti · தேய்பிறை சஷ்டி
+DESCRIPTION:The sixth day after the full moon (theipirai). Some devotees fa
+ st on this Sashti too. Dates follow the Tamil panchangam for Chennai\; tem
+ ples may differ by a day. https://aarupadaiveedu.in/calendar
+URL:https://aarupadaiveedu.in/calendar
+TRANSP:TRANSPARENT
+CATEGORIES:Monthly
+END:VEVENT
+BEGIN:VEVENT
+UID:2027-11-27-visakam-visakam@aarupadaiveedu.in
+DTSTAMP:20261119T160259Z
+DTSTART;VALUE=DATE:20271127
+DTEND;VALUE=DATE:20271128
+SUMMARY:Visakam · விசாகம்
+DESCRIPTION:Murugan's birth star. Dates follow the Tamil panchangam for Che
+ nnai\; temples may differ by a day. https://aarupadaiveedu.in/calendar
+URL:https://aarupadaiveedu.in/calendar
+TRANSP:TRANSPARENT
+CATEGORIES:Monthly
+END:VEVENT
+BEGIN:VEVENT
+UID:2027-12-04-sashti-sashti@aarupadaiveedu.in
+DTSTAMP:20261119T160259Z
+DTSTART;VALUE=DATE:20271204
+DTEND;VALUE=DATE:20271205
+SUMMARY:Sashti · வளர்பிறை சஷ்டி
+DESCRIPTION:Sashti fast on the sixth day after the new moon (valarpirai). D
+ ates follow the Tamil panchangam for Chennai\; temples may differ by a day
+ . https://aarupadaiveedu.in/calendar
+URL:https://aarupadaiveedu.in/calendar
+TRANSP:TRANSPARENT
+CATEGORIES:Monthly
+END:VEVENT
+BEGIN:VEVENT
+UID:2027-12-11-festival-karthigaideepam@aarupadaiveedu.in
+DTSTAMP:20261119T160259Z
+DTSTART;VALUE=DATE:20271211
+DTEND;VALUE=DATE:20271212
+SUMMARY:Karthigai Deepam · கார்த்திகை தீபம்
+DESCRIPTION:Krithigai in the month of Karthigai. Lamps are lit at dusk in e
+ very home and on the temple hills\, including the maha deepam at Thirupara
+ nkundram. Dates follow the Tamil panchangam for Chennai\; temples may diff
+ er by a day. https://aarupadaiveedu.in/calendar
+URL:https://aarupadaiveedu.in/calendar
+TRANSP:TRANSPARENT
+CATEGORIES:Festival
+END:VEVENT
+BEGIN:VEVENT
+UID:2027-12-18-sashti-t-theipiraisashti@aarupadaiveedu.in
+DTSTAMP:20261119T160259Z
+DTSTART;VALUE=DATE:20271218
+DTEND;VALUE=DATE:20271219
+SUMMARY:Theipirai Sashti · தேய்பிறை சஷ்டி
+DESCRIPTION:The sixth day after the full moon (theipirai). Some devotees fa
+ st on this Sashti too. Dates follow the Tamil panchangam for Chennai\; tem
+ ples may differ by a day. https://aarupadaiveedu.in/calendar
+URL:https://aarupadaiveedu.in/calendar
+TRANSP:TRANSPARENT
+CATEGORIES:Monthly
+END:VEVENT
+BEGIN:VEVENT
+UID:2027-12-24-visakam-visakam@aarupadaiveedu.in
+DTSTAMP:20261119T160259Z
+DTSTART;VALUE=DATE:20271224
+DTEND;VALUE=DATE:20271225
+SUMMARY:Visakam · விசாகம்
+DESCRIPTION:Murugan's birth star. Dates follow the Tamil panchangam for Che
+ nnai\; temples may differ by a day. https://aarupadaiveedu.in/calendar
+URL:https://aarupadaiveedu.in/calendar
+TRANSP:TRANSPARENT
+CATEGORIES:Monthly
+END:VEVENT
+END:VCALENDAR
