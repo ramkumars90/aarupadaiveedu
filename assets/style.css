@@ -281,3 +281,19 @@ details.how ul { margin-top: 10px; }
 .cal-day.today { outline: 2px solid var(--leaf); outline-offset: -2px; }
 .today-tag { background: var(--leaf); color: #fff; font-size: .72rem; padding: 1px 7px; border-radius: 999px; vertical-align: middle; }
 .copy-box { flex-basis: 100%; font: inherit; font-size: .9rem; padding: 8px 10px; border: 1px solid var(--line); border-radius: 4px; background: #fff; color: var(--ink); }
+
+
+/* Darshan tables as cards on phones */
+@media (max-width: 640px) {
+  .table-wrap { overflow: visible; }
+  table.wide thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  table.wide, table.wide tbody, table.wide tr, table.wide th, table.wide td { display: block; width: auto; }
+  table.wide tbody { display: grid; gap: 12px; }
+  table.wide tr { background: var(--card); border: 1px solid var(--line); border-left: 3px solid var(--saffron); border-radius: 6px; padding: 12px 14px; }
+  table.wide th, table.wide td { border: 0; padding: 0; }
+  table.wide th { font-size: 1.05rem; }
+  table.wide td { padding-top: 8px; }
+  table.wide td::before { content: attr(data-label); display: block; font-size: .75rem; color: var(--muted); text-transform: uppercase; letter-spacing: .05em; }
+  table.wide td.cost { padding-top: 2px; white-space: normal; color: var(--leaf); font-size: 1.05rem; }
+  table.wide td.cost::before { display: none; }
+}

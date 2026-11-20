@@ -541,3 +541,32 @@
   updateShare(); updateFix();
 
 })();
+
+// Visitor stats (GoatCounter): free, no cookies, no personal data. Does nothing on localhost or when opened as a file.
+(function () {
+  var GC = "https://aarupadaiveedu.goatcounter.com/count";
+  if (!/^https?:$/.test(location.protocol)) return;
+  var s = document.createElement("script");
+  s.async = true; s.src = "https://gc.zgo.at/count.js"; s.setAttribute("data-goatcounter", GC);
+  document.head.appendChild(s);
+
+  // Count useful clicks as events, so we can see what pilgrims actually use.
+  function send(name) {
+    if (window.goatcounter && window.goatcounter.count) window.goatcounter.count({ path: name, title: document.title, event: true });
+  }
+  var page = location.pathname.replace(/^\/|\.html$/g, "") || "home";
+  document.addEventListener("click", function (e) {
+    var el = e.target.closest && e.target.closest("a, button");
+    if (!el) return;
+    var href = el.getAttribute("href") || "", txt = el.textContent.trim();
+    if (el.matches(".sub")) {
+      var which = /festivals/.test(href + (el.getAttribute("data-copy") || "")) ? "festivals" : "all-days";
+      send("subscribe/" + which + "/" + (el.hasAttribute("data-copy") ? "copy-link" : txt.replace(/\s*\(.*\)/, "").toLowerCase().replace(/\s+/g, "-")));
+    }
+    else if (href.indexOf("tel:") === 0) send("call/" + page);
+    else if (/google\.com\/maps/.test(href)) send("maps/" + page);
+    else if (el.hasAttribute("data-share")) send("whatsapp-share/" + page);
+    else if (el.id === "p-copy") send("planner/copy-plan");
+    else if (el.matches("a.fix") && !el.hasAttribute("data-pending")) send("suggest-correction/" + page);
+  });
+})();
