@@ -1,5 +1,17 @@
 (function () {
   var PAGE = document.body.getAttribute("data-page") || "home";
+  // Copy text in every browser: the older copy command first (works in Safari), then the clipboard API.
+  function copyText(text) {
+    var ta = document.createElement("textarea"), ok = false;
+    ta.value = text; ta.setAttribute("readonly", ""); ta.style.position = "fixed"; ta.style.top = "-1000px"; ta.style.opacity = "0";
+    document.body.appendChild(ta); ta.focus(); ta.select(); ta.setSelectionRange(0, text.length);
+    try { ok = document.execCommand("copy"); } catch (e) { ok = false; }
+    document.body.removeChild(ta);
+    if (ok) return Promise.resolve();
+    if (navigator.clipboard && window.isSecureContext) return navigator.clipboard.writeText(text);
+    return Promise.reject();
+  }
+
   var abodes = [
     { n: 1, id: "thiruparankundram", name: "Thiruparankundram", ta: "திருப்பரங்குன்றம்", place: "Madurai", lat: 9.88, lon: 78.07,
       legend: "Where Murugan married Deivanai, daughter of Indra, after his victory." },
@@ -314,8 +326,7 @@
   document.getElementById("p-copy").addEventListener("click", function () {
     var btn = this, txt = planText(lastPlan);
     function done(msg) { btn.textContent = msg; setTimeout(function () { btn.textContent = "Copy plan"; }, 2000); }
-    try { navigator.clipboard.writeText(txt).then(function () { done("Copied"); }, function () { done("Copy failed"); }); }
-    catch (e) { done("Copy failed"); }
+    copyText(txt).then(function () { done("Copied"); }, function () { done("Copy failed: select the plan text instead"); });
   });
   update();
   })();
@@ -465,7 +476,12 @@
     b.addEventListener("click", function () {
       var label = b.textContent, url = b.getAttribute("data-copy");
       function done(m) { b.textContent = m; setTimeout(function () { b.textContent = label; }, 2000); }
-      try { navigator.clipboard.writeText(url).then(function () { done("Link copied"); }, function () { done(url); }); } catch (e) { done(url); }
+      copyText(url).then(function () { done("Link copied"); }, function () {
+        // Copying is blocked: show the link, selected, so it can be copied by hand.
+        var box = b.parentNode.querySelector("input.copy-box");
+        if (!box) { b.insertAdjacentHTML("afterend", '<input class="copy-box" type="text" readonly aria-label="Calendar link" value="' + url + '">'); box = b.nextElementSibling; }
+        box.focus(); box.select(); done("Copy this link");
+      });
     });
   });
 

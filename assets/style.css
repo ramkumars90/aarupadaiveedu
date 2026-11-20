@@ -280,3 +280,4 @@ details.how ul { margin-top: 10px; }
 .cal-day.major .cal-name { color: var(--maroon); }
 .cal-day.today { outline: 2px solid var(--leaf); outline-offset: -2px; }
 .today-tag { background: var(--leaf); color: #fff; font-size: .72rem; padding: 1px 7px; border-radius: 999px; vertical-align: middle; }
+.copy-box { flex-basis: 100%; font: inherit; font-size: .9rem; padding: 8px 10px; border: 1px solid var(--line); border-radius: 4px; background: #fff; color: var(--ink); }
