@@ -297,3 +297,5 @@ details.how ul { margin-top: 10px; }
   table.wide td.cost { padding-top: 2px; white-space: normal; color: var(--leaf); font-size: 1.05rem; }
   table.wide td.cost::before { display: none; }
 }
+
+.cards-top .panel { align-content: start; }
