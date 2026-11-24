@@ -5,6 +5,7 @@ CALSCALE:GREGORIAN
 METHOD:PUBLISH
 X-WR-CALNAME:Murugan festivals · Aaru Padai
 X-WR-CALDESC:The big Murugan festivals of the year\, from aarupadaiveedu.in
+ . Questions or corrections? Use the contact link at aarupadaiveedu.in.
 X-WR-TIMEZONE:Asia/Kolkata
 REFRESH-INTERVAL;VALUE=DURATION:P1D
 X-PUBLISHED-TTL:P1D

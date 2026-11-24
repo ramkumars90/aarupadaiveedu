@@ -153,9 +153,9 @@ if __name__ == "__main__":
     with open(os.path.join(out_dir, "assets", "murugan-days.js"), "w", encoding="utf-8") as f:
         f.write("// Made by tools/make_calendar.py. Do not edit by hand.\nwindow.MURUGAN_DAYS = " + json.dumps(ev, ensure_ascii=False, separators=(",", ":")) + ";\n")
     with open(os.path.join(out_dir, "murugan-days.ics"), "w", encoding="utf-8", newline="") as f:
-        f.write(ics(ev, "Murugan days · Aaru Padai", "Krithigai, Sashti, Visakam and Murugan festivals, from aarupadaiveedu.in", stamp))
+        f.write(ics(ev, "Murugan days · Aaru Padai", "Krithigai, Sashti, Visakam and Murugan festivals, from aarupadaiveedu.in. Questions or corrections? Use the contact link at aarupadaiveedu.in.", stamp))
     with open(os.path.join(out_dir, "murugan-festivals.ics"), "w", encoding="utf-8", newline="") as f:
-        f.write(ics([e for e in ev if e["major"]], "Murugan festivals · Aaru Padai", "The big Murugan festivals of the year, from aarupadaiveedu.in", stamp))
+        f.write(ics([e for e in ev if e["major"]], "Murugan festivals · Aaru Padai", "The big Murugan festivals of the year, from aarupadaiveedu.in. Questions or corrections? Use the contact link at aarupadaiveedu.in.", stamp))
     page = os.path.join(out_dir, "calendar.html")
     if os.path.exists(page):
         s = open(page, encoding="utf-8").read()

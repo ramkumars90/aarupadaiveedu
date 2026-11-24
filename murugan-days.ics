@@ -5,7 +5,8 @@ CALSCALE:GREGORIAN
 METHOD:PUBLISH
 X-WR-CALNAME:Murugan days · Aaru Padai
 X-WR-CALDESC:Krithigai\, Sashti\, Visakam and Murugan festivals\, from aaru
- padaiveedu.in
+ padaiveedu.in. Questions or corrections? Use the contact link at aarupadai
+ veedu.in.
 X-WR-TIMEZONE:Asia/Kolkata
 REFRESH-INTERVAL;VALUE=DURATION:P1D
 X-PUBLISHED-TTL:P1D

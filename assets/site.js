@@ -570,3 +570,16 @@
     else if (el.matches("a.fix") && !el.hasAttribute("data-pending")) send("suggest-correction/" + page);
   });
 })();
+
+// Contact link: the address is only put together when someone clicks, so it never appears in the page for spam bots.
+(function () {
+  function rev(s) { return s.split("").reverse().join(""); }
+  var P = ["udeeviadapuraaotediug", "moc.liamg"];
+  document.addEventListener("click", function (e) {
+    var a = e.target.closest && e.target.closest("a.contact");
+    if (!a) return;
+    e.preventDefault();
+    if (window.goatcounter && window.goatcounter.count) window.goatcounter.count({ path: "contact", title: document.title, event: true });
+    location.href = "mailto:" + rev(P[0]) + "@" + rev(P[1]) + "?subject=" + encodeURIComponent("Aaru Padai website");
+  });
+})();
