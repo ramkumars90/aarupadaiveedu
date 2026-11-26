@@ -233,10 +233,75 @@ a.fix { color: var(--maroon); font-weight: 500; white-space: nowrap; }
 .mine .pick b { color: var(--maroon); font-size: .9rem; }
 .mine .pick p { font-size: .95rem; }
 
-/* Language switch and alternative names */
+/* Alternative names and spellings */
+.aka { color: var(--muted); font-size: .95rem; margin: 0; }
+
+/* Open now badge */
+.status { display: inline-flex; align-items: flex-start; gap: 7px; font-weight: 700; font-size: .88rem; }
+.status::before { content: ""; width: 9px; height: 9px; border-radius: 50%; background: currentColor; flex-shrink: 0; margin-top: .5em; }
+.status.open { color: var(--leaf); }
+.status.soon { color: #a8520a; }
+.status.closed { color: var(--maroon); }
+.fact.status { background: var(--card); }
+.abode .status { grid-column: 2; justify-self: start; }
+
+/* Murugan calendar */
+.next-band { background: var(--card); border-bottom: 1px solid var(--line); padding: 12px 0; font-size: .98rem; }
+.next-band .wrap { display: flex; flex-wrap: wrap; gap: 4px 10px; align-items: baseline; }
+.next-band .next-label { color: var(--saffron); font-weight: 700; text-transform: uppercase; letter-spacing: .1em; font-size: .78rem; }
+.next-band b { color: var(--maroon); }
+.next-band [lang="ta"], .cal [lang="ta"], .cal-next [lang="ta"] { color: var(--saffron); font-size: .92em; }
+.cal-next { margin-top: 18px; display: grid; gap: 10px; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); }
+.cal-next-h { grid-column: 1 / -1; font-size: 1.15rem; margin: 0; }
+.cal-next-item { background: var(--card); border: 1px solid var(--line); border-radius: 6px; padding: 12px 14px; display: grid; gap: 2px; }
+.cal-next-item.major { border-left: 4px solid var(--saffron); }
+.cal-next-item .when { font-size: .8rem; font-weight: 700; color: var(--leaf); text-transform: uppercase; letter-spacing: .06em; }
+.cal-next-item b { color: var(--maroon); }
+.cal-next-item .date { font-size: .9rem; color: var(--muted); }
+.subs { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+.sub-card { display: grid; gap: 10px; align-content: start; }
+.sub-btns { display: flex; flex-wrap: wrap; gap: 8px; }
+.btn.sub { font-size: .9rem; }
+details.how { margin-top: 16px; }
+details.how summary { cursor: pointer; font-weight: 700; color: var(--maroon); }
+details.how ul { margin-top: 10px; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 8px; }
+.chips button { font: inherit; font-size: .9rem; padding: 6px 14px; border-radius: 999px; border: 1px solid var(--line); background: var(--card); color: var(--maroon); cursor: pointer; }
+.chips button[aria-pressed="true"] { background: var(--maroon); border-color: var(--maroon); color: #fff; }
+.chips button:focus-visible { outline: 3px solid var(--saffron); outline-offset: 2px; }
+.cal-month { font-size: 1.1rem; margin: 22px 0 8px; }
+.cal-list { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
+.cal-day { display: grid; grid-template-columns: 64px 1fr; gap: 12px; padding: 10px 0 10px 8px; border-bottom: 1px solid var(--line); }
+.cal-day time { color: var(--muted); font-size: .85rem; line-height: 1.2; }
+.cal-day time b { display: block; font-size: 1.35rem; color: var(--maroon); font-family: var(--display); font-weight: 400; }
+.cal-day .cal-name { display: block; font-weight: 700; color: var(--ink); }
+.cal-day .cal-note { display: block; color: var(--muted); font-size: .9rem; }
+.cal-day.major { background: var(--card); border-left: 4px solid var(--saffron); padding-left: 10px; }
+.cal-day.major .cal-name { color: var(--maroon); }
+.cal-day.today { outline: 2px solid var(--leaf); outline-offset: -2px; }
+.today-tag { background: var(--leaf); color: #fff; font-size: .72rem; padding: 1px 7px; border-radius: 999px; vertical-align: middle; }
+.copy-box { flex-basis: 100%; font: inherit; font-size: .9rem; padding: 8px 10px; border: 1px solid var(--line); border-radius: 4px; background: #fff; color: var(--ink); }
+
+
+/* Darshan tables as cards on phones */
+@media (max-width: 640px) {
+  .table-wrap { overflow: visible; }
+  table.wide thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  table.wide, table.wide tbody, table.wide tr, table.wide th, table.wide td { display: block; width: auto; }
+  table.wide tbody { display: grid; gap: 12px; }
+  table.wide tr { background: var(--card); border: 1px solid var(--line); border-left: 3px solid var(--saffron); border-radius: 6px; padding: 12px 14px; }
+  table.wide th, table.wide td { border: 0; padding: 0; }
+  table.wide th { font-size: 1.05rem; }
+  table.wide td { padding-top: 8px; }
+  table.wide td::before { content: attr(data-label); display: block; font-size: .75rem; color: var(--muted); text-transform: uppercase; letter-spacing: .05em; }
+  table.wide td.cost { padding-top: 2px; white-space: normal; color: var(--leaf); font-size: 1.05rem; }
+  table.wide td.cost::before { display: none; }
+}
+
+.cards-top .panel { align-content: start; }
+/* Language switch */
 .site-header nav a.lang { border: 1px solid var(--gold); border-radius: 4px; padding: 0 10px; }
 .site-header nav a.lang:hover { background: var(--maroon-deep); text-decoration: none; }
-.aka { color: var(--muted); font-size: .95rem; margin: 0; }
 
 /* Tamil pages */
 html[lang="ta"] {

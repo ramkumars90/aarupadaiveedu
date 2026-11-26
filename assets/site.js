@@ -6,6 +6,18 @@
   var TA_READY = ["home", "thiruchendur"];
   function L(en, ta) { return TA ? ta : en; }
 
+  // Copy text in every browser: the older copy command first (works in Safari), then the clipboard API.
+  function copyText(text) {
+    var ta = document.createElement("textarea"), ok = false;
+    ta.value = text; ta.setAttribute("readonly", ""); ta.style.position = "fixed"; ta.style.top = "-1000px"; ta.style.opacity = "0";
+    document.body.appendChild(ta); ta.focus(); ta.select(); ta.setSelectionRange(0, text.length);
+    try { ok = document.execCommand("copy"); } catch (e) { ok = false; }
+    document.body.removeChild(ta);
+    if (ok) return Promise.resolve();
+    if (navigator.clipboard && window.isSecureContext) return navigator.clipboard.writeText(text);
+    return Promise.reject();
+  }
+
   var abodes = [
     { n: 1, id: "thiruparankundram", name: "Thiruparankundram", ta: "திருப்பரங்குன்றம்", place: "Madurai", lat: 9.88, lon: 78.07,
       legend: "Where Murugan married Deivanai, daughter of Indra, after his victory.",
@@ -365,8 +377,7 @@
   document.getElementById("p-copy").addEventListener("click", function () {
     var btn = this, txt = planText(lastPlan), label = btn.textContent;
     function done(msg) { btn.textContent = msg; setTimeout(function () { btn.textContent = label; }, 2000); }
-    try { navigator.clipboard.writeText(txt).then(function () { done(L("Copied", "நகலெடுக்கப்பட்டது")); }, function () { done(L("Copy failed", "நகலெடுக்க முடியவில்லை")); }); }
-    catch (e) { done(L("Copy failed", "நகலெடுக்க முடியவில்லை")); }
+    copyText(txt).then(function () { done(L("Copied", "நகலெடுக்கப்பட்டது")); }, function () { done(L("Copy failed: select the plan text instead", "நகலெடுக்க முடியவில்லை: திட்டத்தைத் தேர்ந்தெடுத்து நகலெடுக்கவும்")); });
   });
   update();
   })();
@@ -401,6 +412,131 @@
     });
   });
 
+
+  // ---------- Open now ----------
+  // Usual daily hours (India time), kept in step with the timings on each temple page.
+  var HOURS = {
+    thiruparankundram: [["05:00", "13:00"], ["16:00", "21:00"]],
+    thiruchendur: [["04:00", "21:00"]],
+    palani: [["05:45", "20:00"]],
+    swamimalai: [["06:00", "12:30"], ["16:00", "21:00"]],
+    thiruthani: [["05:45", "20:45"]],
+    pazhamudircholai: [["06:00", "18:00"]]
+  };
+  var LAST_ENTRY = { thiruchendur: "19:30" }; // free queue entry stops before the doors close
+  function mins(t) { var p = t.split(":"); return +p[0] * 60 + +p[1]; }
+  function clock(m) { var h = Math.floor(m / 60) % 24, mm = m % 60, ap = h < 12 ? "AM" : "PM"; h = h % 12 || 12; return h + ":" + (mm < 10 ? "0" : "") + mm + " " + ap; }
+  function openStatus(id) {
+    var ist = new Date(Date.now() + 330 * 60000), now = ist.getUTCHours() * 60 + ist.getUTCMinutes(), slots = HOURS[id];
+    for (var i = 0; i < slots.length; i++) {
+      var o = mins(slots[i][0]), c = mins(slots[i][1]);
+      if (now < o) return { cls: "closed", text: i ? "Closed for the afternoon · reopens " + clock(o) : "Closed now · opens " + clock(o) };
+      if (now < c) {
+        var le = LAST_ENTRY[id] ? mins(LAST_ENTRY[id]) : null;
+        if (le !== null && now >= le) return { cls: "soon", text: "Queue closed for today · doors close " + clock(c) };
+        var next = i < slots.length - 1 ? ", reopens " + clock(mins(slots[i + 1][0])) : "";
+        if (c - now <= 60) return { cls: "soon", text: "Closing soon · closes " + clock(c) + next };
+        return { cls: "open", text: "Open now · closes " + clock(c) + next };
+      }
+    }
+    return { cls: "closed", text: "Closed now · opens " + clock(mins(slots[0][0])) + " tomorrow" };
+  }
+  function showStatus() {
+    document.querySelectorAll("[data-status]").forEach(function (el) {
+      var st = openStatus(el.getAttribute("data-status"));
+      el.className = el.className.replace(/\b(open|soon|closed)\b/g, "").trim() + " " + st.cls;
+      el.textContent = st.text;
+    });
+  }
+  if (HOURS[PAGE]) {
+    var factsRow = document.querySelector(".temple-hero .facts");
+    if (factsRow) factsRow.insertAdjacentHTML("afterbegin", '<span class="fact status" data-status="' + PAGE + '"></span>');
+  }
+  document.querySelectorAll(".abode").forEach(function (card) {
+    var id = (card.getAttribute("href") || "").replace(".html", ""), place = card.querySelector(".place");
+    if (HOURS[id] && place) place.insertAdjacentHTML("afterend", '<span class="status" data-status="' + id + '"></span>');
+  });
+  showStatus(); setInterval(showStatus, 60000);
+  if (PAGE === "home" && document.getElementById("abode-list")) {
+    var hd = document.querySelector("#abodes .section-head .quiet");
+    if (hd) hd.insertAdjacentHTML("beforeend", " Open and closed times show the usual daily hours, in India time. Festival days differ.");
+  }
+
+  // ---------- Murugan calendar ----------
+  var DAYS = window.MURUGAN_DAYS || [];
+  var MON = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+  var WDAY = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+  function todayIST() { return new Date(Date.now() + 330 * 60000).toISOString().slice(0, 10); }
+  function dayDiff(a, b) { return Math.round((Date.parse(b) - Date.parse(a)) / 86400000); }
+  function nice(iso) { var d = new Date(iso + "T00:00:00Z"); return WDAY[d.getUTCDay()] + " " + d.getUTCDate() + " " + MON[d.getUTCMonth()]; }
+  function when(n) { return n === 0 ? "Today" : n === 1 ? "Tomorrow" : "in " + n + " days"; }
+  function upcoming(n) {
+    var t = todayIST(), out = [];
+    for (var i = 0; i < DAYS.length && out.length < n; i++) if (DAYS[i].date >= t) out.push(DAYS[i]);
+    return out;
+  }
+  // Home page strip
+  var band = document.getElementById("next-day");
+  if (band && DAYS.length) {
+    var nx = upcoming(2), t0 = todayIST();
+    if (nx.length) {
+      var e0 = nx[0], n0 = dayDiff(t0, e0.date);
+      band.querySelector(".wrap").innerHTML = '<span class="next-label">' + (n0 === 0 ? "Today" : "Next Murugan day") + '</span> <b>' + e0.name + '</b> <span lang="ta">' + e0.ta + '</span> · ' + nice(e0.date) + (n0 > 0 ? " · " + when(n0) : "") +
+        ' <a href="calendar.html">See all dates</a>';
+      band.hidden = false;
+    }
+  }
+  // Calendar page
+  var cal = document.getElementById("cal");
+  if (cal) {
+    var t1 = todayIST();
+    cal.querySelectorAll("li.cal-day").forEach(function (li) {
+      var d = li.getAttribute("data-date");
+      if (d < t1) li.classList.add("past");
+      if (d === t1) { li.classList.add("today"); li.querySelector(".cal-name").insertAdjacentHTML("afterbegin", '<span class="today-tag">Today</span> '); }
+    });
+    var nextBox = document.getElementById("cal-next"), up3 = upcoming(3);
+    if (nextBox && up3.length) {
+      nextBox.innerHTML = '<h2 class="cal-next-h">Coming up</h2>' + up3.map(function (e) {
+        var n = dayDiff(t1, e.date);
+        return '<div class="cal-next-item' + (e.major ? " major" : "") + '"><span class="when">' + when(n) + '</span><b>' + e.name + '</b> <span lang="ta">' + e.ta + '</span><span class="date">' + nice(e.date) + '</span></div>';
+      }).join("");
+      nextBox.hidden = false;
+    }
+    function applyFilter(k) {
+      cal.querySelectorAll("li.cal-day").forEach(function (li) {
+        var kind = li.getAttribute("data-kind"), nm = li.querySelector(".cal-name").textContent;
+        var show = k === "all" || kind === k || (k === "sashti" && kind === "sashti-t") ||
+          (k === "krithigai" && /Krithigai|Karthigai/.test(nm) && kind === "festival") ||
+          (k === "sashti" && /Sashti|Soorasamharam/.test(nm) && kind === "festival") ||
+          (k === "visakam" && /Visakam/.test(nm) && kind === "festival");
+        li.hidden = !show || li.classList.contains("past");
+      });
+      cal.querySelectorAll("h3.cal-month").forEach(function (h) {
+        var ol = h.nextElementSibling, any = ol && ol.querySelector("li:not([hidden])");
+        h.hidden = ol.hidden = !any;
+      });
+    }
+    document.querySelectorAll(".chips [data-filter]").forEach(function (b) {
+      b.addEventListener("click", function () {
+        document.querySelectorAll(".chips [data-filter]").forEach(function (x) { x.setAttribute("aria-pressed", x === b ? "true" : "false"); });
+        applyFilter(b.getAttribute("data-filter"));
+      });
+    });
+    applyFilter("all");
+  }
+  document.querySelectorAll("[data-copy]").forEach(function (b) {
+    b.addEventListener("click", function () {
+      var label = b.textContent, url = b.getAttribute("data-copy");
+      function done(m) { b.textContent = m; setTimeout(function () { b.textContent = label; }, 2000); }
+      copyText(url).then(function () { done("Link copied"); }, function () {
+        // Copying is blocked: show the link, selected, so it can be copied by hand.
+        var box = b.parentNode.querySelector("input.copy-box");
+        if (!box) { b.insertAdjacentHTML("afterend", '<input class="copy-box" type="text" readonly aria-label="Calendar link" value="' + url + '">'); box = b.nextElementSibling; }
+        box.focus(); box.select(); done("Copy this link");
+      });
+    });
+  });
 
   // ---------- Sharing and corrections ----------
   // One setting: the public address comes from the og:url tag in <head>.
@@ -460,4 +596,46 @@
   });
   updateShare(); updateFix();
 
+})();
+
+// Visitor stats (GoatCounter): free, no cookies, no personal data. Does nothing on localhost or when opened as a file.
+(function () {
+  var GC = "https://aarupadaiveedu.goatcounter.com/count";
+  if (!/^https?:$/.test(location.protocol)) return;
+  var s = document.createElement("script");
+  s.async = true; s.src = "https://gc.zgo.at/count.js"; s.setAttribute("data-goatcounter", GC);
+  document.head.appendChild(s);
+
+  // Count useful clicks as events, so we can see what pilgrims actually use.
+  function send(name) {
+    if (window.goatcounter && window.goatcounter.count) window.goatcounter.count({ path: name, title: document.title, event: true });
+  }
+  var page = location.pathname.replace(/^\/|\.html$/g, "") || "home";
+  document.addEventListener("click", function (e) {
+    var el = e.target.closest && e.target.closest("a, button");
+    if (!el) return;
+    var href = el.getAttribute("href") || "", txt = el.textContent.trim();
+    if (el.matches(".sub")) {
+      var which = /festivals/.test(href + (el.getAttribute("data-copy") || "")) ? "festivals" : "all-days";
+      send("subscribe/" + which + "/" + (el.hasAttribute("data-copy") ? "copy-link" : txt.replace(/\s*\(.*\)/, "").toLowerCase().replace(/\s+/g, "-")));
+    }
+    else if (href.indexOf("tel:") === 0) send("call/" + page);
+    else if (/google\.com\/maps/.test(href)) send("maps/" + page);
+    else if (el.hasAttribute("data-share")) send("whatsapp-share/" + page);
+    else if (el.id === "p-copy") send("planner/copy-plan");
+    else if (el.matches("a.fix") && !el.hasAttribute("data-pending")) send("suggest-correction/" + page);
+  });
+})();
+
+// Contact link: the address is only put together when someone clicks, so it never appears in the page for spam bots.
+(function () {
+  function rev(s) { return s.split("").reverse().join(""); }
+  var P = ["udeeviadapuraaotediug", "moc.liamg"];
+  document.addEventListener("click", function (e) {
+    var a = e.target.closest && e.target.closest("a.contact");
+    if (!a) return;
+    e.preventDefault();
+    if (window.goatcounter && window.goatcounter.count) window.goatcounter.count({ path: "contact", title: document.title, event: true });
+    location.href = "mailto:" + rev(P[0]) + "@" + rev(P[1]) + "?subject=" + encodeURIComponent("Aaru Padai website");
+  });
 })();

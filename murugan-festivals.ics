@@ -1,0 +1,149 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Aaru Padai//Murugan calendar//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:Murugan festivals · Aaru Padai
+X-WR-CALDESC:The big Murugan festivals of the year\, from aarupadaiveedu.in
+ . Questions or corrections? Use the contact link at aarupadaiveedu.in.
+X-WR-TIMEZONE:Asia/Kolkata
+REFRESH-INTERVAL;VALUE=DURATION:P1D
+X-PUBLISHED-TTL:P1D
+BEGIN:VEVENT
+UID:2026-11-24-festival-karthigaideepam@aarupadaiveedu.in
+DTSTAMP:20261119T160259Z
+DTSTART;VALUE=DATE:20261124
+DTEND;VALUE=DATE:20261125
+SUMMARY:Karthigai Deepam · கார்த்திகை தீபம்
+DESCRIPTION:Krithigai in the month of Karthigai. Lamps are lit at dusk in e
+ very home and on the temple hills\, including the maha deepam at Thirupara
+ nkundram. Dates follow the Tamil panchangam for Chennai\; temples may diff
+ er by a day. https://aarupadaiveedu.in/calendar
+URL:https://aarupadaiveedu.in/calendar
+TRANSP:TRANSPARENT
+CATEGORIES:Festival
+END:VEVENT
+BEGIN:VEVENT
+UID:2027-01-18-festival-thaikrithigai@aarupadaiveedu.in
+DTSTAMP:20261119T160259Z
+DTSTART;VALUE=DATE:20270118
+DTEND;VALUE=DATE:20270119
+SUMMARY:Thai Krithigai · தைக் கிருத்திகை
+DESCRIPTION:Krithigai in the month of Thai\, one of the three great Krithig
+ ais. Dates follow the Tamil panchangam for Chennai\; temples may differ by
+  a day. https://aarupadaiveedu.in/calendar
+URL:https://aarupadaiveedu.in/calendar
+TRANSP:TRANSPARENT
+CATEGORIES:Festival
+END:VEVENT
+BEGIN:VEVENT
+UID:2027-01-22-festival-thaipoosam@aarupadaiveedu.in
+DTSTAMP:20261119T160259Z
+DTSTART;VALUE=DATE:20270122
+DTEND;VALUE=DATE:20270123
+SUMMARY:Thaipoosam · தைப்பூசம்
+DESCRIPTION:Poosam star in the month of Thai. The biggest day at Palani\, w
+ ith kavadi processions at all six abodes. Dates follow the Tamil panchanga
+ m for Chennai\; temples may differ by a day. https://aarupadaiveedu.in/cal
+ endar
+URL:https://aarupadaiveedu.in/calendar
+TRANSP:TRANSPARENT
+CATEGORIES:Festival
+END:VEVENT
+BEGIN:VEVENT
+UID:2027-03-22-festival-panguniuthiram@aarupadaiveedu.in
+DTSTAMP:20261119T160259Z
+DTSTART;VALUE=DATE:20270322
+DTEND;VALUE=DATE:20270323
+SUMMARY:Panguni Uthiram · பங்குனி உத்திரம்
+DESCRIPTION:Uthiram star in the month of Panguni\, the day of divine weddin
+ gs. Palani holds a ten-day festival. Dates follow the Tamil panchangam for
+  Chennai\; temples may differ by a day. https://aarupadaiveedu.in/calendar
+URL:https://aarupadaiveedu.in/calendar
+TRANSP:TRANSPARENT
+CATEGORIES:Festival
+END:VEVENT
+BEGIN:VEVENT
+UID:2027-05-20-festival-vaikasivisakam@aarupadaiveedu.in
+DTSTAMP:20261119T160259Z
+DTSTART;VALUE=DATE:20270520
+DTEND;VALUE=DATE:20270521
+SUMMARY:Vaikasi Visakam · வைகாசி விசாகம்
+DESCRIPTION:Murugan's birth star in the month of Vaikasi. Big celebrations 
+ at Thiruchendur and Thiruparankundram. Dates follow the Tamil panchangam f
+ or Chennai\; temples may differ by a day. https://aarupadaiveedu.in/calend
+ ar
+URL:https://aarupadaiveedu.in/calendar
+TRANSP:TRANSPARENT
+CATEGORIES:Festival
+END:VEVENT
+BEGIN:VEVENT
+UID:2027-07-28-festival-aadikrithigai@aarupadaiveedu.in
+DTSTAMP:20261119T160259Z
+DTSTART;VALUE=DATE:20270728
+DTEND;VALUE=DATE:20270729
+SUMMARY:Aadi Krithigai · ஆடிக் கிருத்திகை
+DESCRIPTION:Krithigai in the month of Aadi\, one of the three great Krithig
+ ais. Thiruthani holds its float festival. Dates follow the Tamil panchanga
+ m for Chennai\; temples may differ by a day. https://aarupadaiveedu.in/cal
+ endar
+URL:https://aarupadaiveedu.in/calendar
+TRANSP:TRANSPARENT
+CATEGORIES:Festival
+END:VEVENT
+BEGIN:VEVENT
+UID:2027-10-30-festival-kandasashtibegins@aarupadaiveedu.in
+DTSTAMP:20261119T160259Z
+DTSTART;VALUE=DATE:20271030
+DTEND;VALUE=DATE:20271031
+SUMMARY:Kanda Sashti begins · கந்த சஷ்டி தொடக்
+ கம்
+DESCRIPTION:Six days of fasting and prayer begin. Thiruchendur is the centr
+ e of the festival. Dates follow the Tamil panchangam for Chennai\; temples
+  may differ by a day. https://aarupadaiveedu.in/calendar
+URL:https://aarupadaiveedu.in/calendar
+TRANSP:TRANSPARENT
+CATEGORIES:Festival
+END:VEVENT
+BEGIN:VEVENT
+UID:2027-11-04-festival-soorasamharam@aarupadaiveedu.in
+DTSTAMP:20261119T160259Z
+DTSTART;VALUE=DATE:20271104
+DTEND;VALUE=DATE:20271105
+SUMMARY:Soorasamharam · சூரசம்ஹாரம்
+DESCRIPTION:The sixth day of Kanda Sashti. In the evening Murugan defeats S
+ oorapadman on the shore at Thiruchendur. Dates follow the Tamil panchangam
+  for Chennai\; temples may differ by a day. https://aarupadaiveedu.in/cale
+ ndar
+URL:https://aarupadaiveedu.in/calendar
+TRANSP:TRANSPARENT
+CATEGORIES:Festival
+END:VEVENT
+BEGIN:VEVENT
+UID:2027-11-05-festival-thirukalyanam@aarupadaiveedu.in
+DTSTAMP:20261119T160259Z
+DTSTART;VALUE=DATE:20271105
+DTEND;VALUE=DATE:20271106
+SUMMARY:Thirukalyanam · திருக்கல்யாணம்
+DESCRIPTION:Murugan's wedding with Deivanai\, the day after Soorasamharam. 
+ Dates follow the Tamil panchangam for Chennai\; temples may differ by a da
+ y. https://aarupadaiveedu.in/calendar
+URL:https://aarupadaiveedu.in/calendar
+TRANSP:TRANSPARENT
+CATEGORIES:Festival
+END:VEVENT
+BEGIN:VEVENT
+UID:2027-12-11-festival-karthigaideepam@aarupadaiveedu.in
+DTSTAMP:20261119T160259Z
+DTSTART;VALUE=DATE:20271211
+DTEND;VALUE=DATE:20271212
+SUMMARY:Karthigai Deepam · கார்த்திகை தீபம்
+DESCRIPTION:Krithigai in the month of Karthigai. Lamps are lit at dusk in e
+ very home and on the temple hills\, including the maha deepam at Thirupara
+ nkundram. Dates follow the Tamil panchangam for Chennai\; temples may diff
+ er by a day. https://aarupadaiveedu.in/calendar
+URL:https://aarupadaiveedu.in/calendar
+TRANSP:TRANSPARENT
+CATEGORIES:Festival
+END:VEVENT
+END:VCALENDAR
