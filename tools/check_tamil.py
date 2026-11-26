@@ -8,7 +8,7 @@ def facts(path):
     s = re.sub(r"<script.*?</script>|<style.*?</style>|<head>.*?</head>", " ", s, flags=re.S)
     s = re.sub(r"<[^>]+>", " ", s)
     times = set(re.findall(r"\b\d{1,2}:\d{2}\b", s))
-    prices = set(re.findall(r"₹[\d,]+", s))
+    prices = {p.rstrip(",") for p in re.findall(r"₹[\d,]+", s)}
     phones = set(re.findall(r"\b0\d{2,4} \d{6,7}\b", s))
     return times | prices | phones
 
