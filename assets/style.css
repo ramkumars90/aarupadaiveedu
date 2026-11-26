@@ -152,10 +152,25 @@ figcaption { font-size: .82rem; color: var(--muted); margin-top: 6px; }
 .story-figure { display: flex; align-items: flex-end; gap: 22px; padding: 14px 18px; background: var(--card); border: 1px solid var(--line); border-radius: 6px; }
 .story-figure svg { width: 110px; height: 86px; flex-shrink: 0; }
 .story-figure figcaption { margin: 0; align-self: center; }
-footer .emblem { justify-content: flex-start; }
-footer .emblem::before { display: none; }
 footer .emblem svg.bird { width: 64px; height: 50px; }
 footer .emblem svg.vel { width: 16px; height: 56px; }
+
+/* Site footer: brand note, two link columns, blessing */
+.site-footer { border-top: 1px solid var(--line); margin-top: 24px; }
+.site-footer .wrap { gap: 22px; }
+.foot-grid { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr) minmax(0, 1fr); gap: 28px 40px; }
+.foot-brand { font-family: var(--display); font-size: 1.3rem; color: var(--maroon); margin-bottom: 4px; }
+.foot-about p:last-child { max-width: 46ch; }
+.foot-col { display: grid; gap: 6px; align-content: start; }
+.foot-col h2 { font-family: var(--body); font-size: .74rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--gold); margin-bottom: 2px; }
+.foot-col a { text-decoration: none; font-size: .95rem; justify-self: start; }
+.foot-col a:hover { text-decoration: underline; text-decoration-color: var(--gold); }
+.foot-note { font-size: .82rem; }
+.foot-blessing { text-align: center; font-family: var(--display); font-size: 1.05rem; letter-spacing: .06em; color: var(--maroon); padding-top: 16px; border-top: 1px solid var(--line); }
+@media (max-width: 760px) {
+  .foot-grid { grid-template-columns: 1fr 1fr; }
+  .foot-about { grid-column: 1 / -1; }
+}
 
 
 /* Temple page additions */
