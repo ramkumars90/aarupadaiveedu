@@ -28,13 +28,14 @@
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta name="theme-color" content="#6a1420">
 <link rel="stylesheet" href="../assets/style.css">
+<script src="../assets/murugan-days.js" defer></script>
 <script src="../assets/site.js" defer></script>
 <script type="application/ld+json">
 {
  "@context": "https://schema.org",
  "@type": "WebSite",
  "name": "ஆறுபடை வீடு",
- "alternateName": ["Aaru Padai", "Arupadai Veedu guide"],
+ "alternateName": ["Aaru Padai", "Arupadai Veedu guide", "Aarupadai Veedu", "ஆறு படை வீடுகள்", "முருகனின் ஆறுபடை வீடுகள்"],
  "url": "https://aarupadaiveedu.in/ta/",
  "inLanguage": "ta"
 }
@@ -109,6 +110,7 @@
     <nav aria-label="முதன்மை">
       <a href="index.html">ஆறு படை வீடுகள்</a>
       <a href="index.html#plan">பயணத் திட்டம்</a>
+      <a href="../calendar.html">நாள்காட்டி</a>
       <a class="lang" href="../index.html" lang="en" hreflang="en">English</a>
     </nav>
   </div>
@@ -123,11 +125,12 @@
         <p class="eyebrow">ஆறுபடை வீடு யாத்திரை வழிகாட்டி</p>
         <h1>ஆறு மலைகள், ஒரு கடற்கரை, ஒரே இறைவன்</h1>
         <p class="lede prose">ஆறுபடை வீடுகள், தமிழ்நாட்டில் உள்ள முருகப்பெருமானின் ஆறு புனிதத் தலங்கள். பல நூற்றாண்டுகளாகப் பக்தர்கள் இவற்றுக்கு யாத்திரை சென்று வருகின்றனர். ஒவ்வொரு படை வீட்டையும் அறிந்துகொள்ளவும், பயணத்தைத் திட்டமிடவும் இந்த வழிகாட்டி உதவும்.</p>
+        <p class="aka">ஆங்கிலத்தில் Arupadai Veedu, Aarupadai Veedu, Arupadaiveedu என்றும் எழுதப்படுகிறது. முருகனின் ஆறு கோயில்கள் என்றும் அழைக்கப்படுகின்றன.</p>
         <p class="quiet prose">ஆறுபடை வீடு என்ற கருத்து, சங்க காலப் புலவர் நக்கீரர் இயற்றிய <i>திருமுருகாற்றுப்படை</i> நூலிலிருந்து வருகிறது. முருகனை நாடிச் செல்லும் அடியாரை, ஒவ்வொரு தலமாக அந்நூல் வழிநடத்துகிறது.</p>
         <div class="actions"><a class="btn-wa" data-share href="https://wa.me/" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 3C7 3 3 6.6 3 11c0 2.2 1 4.2 2.7 5.6L5 21l4.3-2.2c.9.2 1.8.3 2.7.3 5 0 9-3.6 9-8s-4-8-9-8z"/></svg>வாட்ஸ்அப்பில் பகிர</a></div>
       </div>
       <figure class="hero-photo">
-        <img src="../img/home-gopuram.jpg" alt="வானின் பின்னணியில் திருச்செந்தூர்க் கோயிலின் உயர்ந்த வெண்ணிற ராஜகோபுரம்" width="1129" height="1400">
+        <picture><source type="image/webp" srcset="../img/home-gopuram-480.webp 480w, ../img/home-gopuram-800.webp 800w, ../img/home-gopuram-1129.webp 1129w" sizes="(max-width: 760px) 100vw, 440px"><img fetchpriority="high" src="../img/home-gopuram.jpg" alt="வானின் பின்னணியில் திருச்செந்தூர்க் கோயிலின் உயர்ந்த வெண்ணிற ராஜகோபுரம்" width="1129" height="1400"></picture>
         <figcaption>திருச்செந்தூர் ராஜகோபுரம், அக்டோபர் 2025. படம்: ராம்</figcaption>
       </figure>
     </div>
@@ -139,10 +142,12 @@
         <svg class="bird"><use href="#rooster" width="100%" height="100%"/></svg>
       </div></div></div>
 
+  <div class="next-band" id="next-day" hidden><div class="wrap"></div></div>
+
   <section class="block" id="abodes">
     <div class="wrap">
       <div class="section-head">
-        <h2>ஆறு படை வீடுகள், பாரம்பரிய வரிசையில்</h2>
+        <h2>முருகனின் ஆறு படை வீடுகள், பாரம்பரிய வரிசையில்</h2>
         <p class="quiet">ஒவ்வொரு படை வீடும் முருகனின் வரலாற்றில் ஒரு நிகழ்வைக் குறிக்கிறது. இந்த வரிசையிலோ, குறைந்த தூர வழியிலோ தரிசிக்கலாம்.</p>
       </div>
       <div class="abodes" id="abode-list"></div>
@@ -212,6 +217,7 @@
       <div class="section-head">
         <h2>முருகனின் திருவிழாக்கள்</h2>
         <p class="quiet">முக்கியத் திருவிழாக்களில் கூட்டம் மிக அதிகம். திருவிழாவுக்காகவே செல்லலாம், அல்லது அமைதியான தரிசனத்துக்கு அந்த நாட்களைத் தவிர்க்கலாம்.</p>
+        <p><a class="btn" href="../calendar.html">கிருத்திகை, சஷ்டி, திருவிழா நாட்கள் அனைத்தும், உங்கள் நாள்காட்டியில் சேர்க்கும் வசதியுடன் (ஆங்கிலத்தில்)</a></p>
       </div>
       <div class="fest">
         <div><b>தைப்பூசம்</b><span>தை · ஜன–பிப் · பழனி முதன்மை</span></div>
@@ -235,6 +241,8 @@
       </div>
     <p><b style="color:var(--maroon)">ஆறுபடை வீடு</b> ஒரு பக்தர் தனிப்பட்ட முறையில் தொகுத்த வழிகாட்டி; இது அதிகாரப்பூர்வ கோயில் இணையதளம் அல்ல. நேரங்களும் விதிமுறைகளும் மாறக்கூடும், எனவே பயணத்துக்கு முன் கோயிலில் உறுதி செய்துகொள்ளுங்கள்.</p>
     <p>தகவல் ஏதேனும் பழையதாக உள்ளதா? <a class="fix" data-fix="General" href="#">திருத்தம் தெரிவிக்க</a>. பக்தர்களின் தகவல்களே இந்த வழிகாட்டியைச் சரியாக வைத்திருக்கின்றன.</p>
+    <p>கேள்விகள் அல்லது கருத்துகள்? <a class="contact" href="#" rel="nofollow">எங்களைத் தொடர்புகொள்ள</a>.</p>
+    <p>இந்தியாவுக்கு வெளியிலிருந்து வருகிறீர்களா? <a href="../abroad.html">வெளிநாட்டுப் பக்தர்களுக்கான வழிகாட்டி</a> (ஆங்கிலத்தில்).</p>
     <p>ஓம் சரவண பவ.</p>
     <div class="toast" id="toast" role="status" hidden></div>
   </div>

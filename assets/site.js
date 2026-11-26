@@ -3,7 +3,9 @@
   var TA = (document.documentElement.lang || "en").slice(0, 2) === "ta";
   var LANG = TA ? "ta" : "en";
   // Pages that have a Tamil version. Tamil pages link to the English page for the rest.
-  var TA_READY = ["home", "thiruchendur"];
+  var TA_READY = ["home", "thiruparankundram", "thiruchendur", "palani", "swamimalai", "thiruthani", "pazhamudircholai"];
+  // Pages other than the six abodes that Tamil pages may link to: Tamil when ready, else English.
+  var OTHER = ["calendar", "abroad"];
   function L(en, ta) { return TA ? ta : en; }
 
   // Copy text in every browser: the older copy command first (works in Safari), then the clipboard API.
@@ -43,12 +45,13 @@
   var byId = {}; abodes.forEach(function (a) { byId[a.id] = a; });
   function aname(id) { return TA ? byId[id].ta : byId[id].name; }
   function link(id) { return (TA && TA_READY.indexOf(id) < 0 ? "../" : "") + id + ".html"; }
+  function idFromHref(h) { var m = (h || "").match(/([a-z]+)\.html$/); return m ? m[1] : ""; }
   if (PAGE === "home" && IDS.indexOf(location.hash.slice(1)) >= 0) { location.replace(link(location.hash.slice(1))); return; }
 
   // On Tamil pages, point links at the English page until that page is translated.
   if (TA) document.querySelectorAll("a[href]").forEach(function (a) {
     var m = a.getAttribute("href").match(/^([a-z]+)\.html$/);
-    if (m && IDS.indexOf(m[1]) >= 0) a.setAttribute("href", link(m[1]));
+    if (m && (IDS.indexOf(m[1]) >= 0 || OTHER.indexOf(m[1]) >= 0)) a.setAttribute("href", link(m[1]));
   });
 
   // Abode cards
@@ -426,20 +429,26 @@
   var LAST_ENTRY = { thiruchendur: "19:30" }; // free queue entry stops before the doors close
   function mins(t) { var p = t.split(":"); return +p[0] * 60 + +p[1]; }
   function clock(m) { var h = Math.floor(m / 60) % 24, mm = m % 60, ap = h < 12 ? "AM" : "PM"; h = h % 12 || 12; return h + ":" + (mm < 10 ? "0" : "") + mm + " " + ap; }
+  function clockTa(m) {
+    var h = Math.floor(m / 60) % 24, mm = m % 60, part = h < 6 ? "அதிகாலை" : h < 12 ? "காலை" : h < 16 ? "மதியம்" : h < 19 ? "மாலை" : "இரவு";
+    return part + " " + (h % 12 || 12) + ":" + (mm < 10 ? "0" : "") + mm;
+  }
+  function clk(m) { return TA ? clockTa(m) : clock(m); }
   function openStatus(id) {
     var ist = new Date(Date.now() + 330 * 60000), now = ist.getUTCHours() * 60 + ist.getUTCMinutes(), slots = HOURS[id];
     for (var i = 0; i < slots.length; i++) {
       var o = mins(slots[i][0]), c = mins(slots[i][1]);
-      if (now < o) return { cls: "closed", text: i ? "Closed for the afternoon · reopens " + clock(o) : "Closed now · opens " + clock(o) };
+      if (now < o) return { cls: "closed", text: i ? L("Closed for the afternoon · reopens " + clk(o), "மதிய நேரம் நடை சாத்தப்பட்டுள்ளது · மீண்டும் திறப்பு " + clk(o))
+        : L("Closed now · opens " + clk(o), "இப்போது நடை சாத்தப்பட்டுள்ளது · திறப்பு " + clk(o)) };
       if (now < c) {
         var le = LAST_ENTRY[id] ? mins(LAST_ENTRY[id]) : null;
-        if (le !== null && now >= le) return { cls: "soon", text: "Queue closed for today · doors close " + clock(c) };
-        var next = i < slots.length - 1 ? ", reopens " + clock(mins(slots[i + 1][0])) : "";
-        if (c - now <= 60) return { cls: "soon", text: "Closing soon · closes " + clock(c) + next };
-        return { cls: "open", text: "Open now · closes " + clock(c) + next };
+        if (le !== null && now >= le) return { cls: "soon", text: L("Queue closed for today · doors close " + clk(c), "இன்றைய வரிசை முடிந்தது · நடை சாத்துதல் " + clk(c)) };
+        var next = i < slots.length - 1 ? L(", reopens ", ", மீண்டும் திறப்பு ") + clk(mins(slots[i + 1][0])) : "";
+        if (c - now <= 60) return { cls: "soon", text: L("Closing soon · closes ", "விரைவில் நடை சாத்தப்படும் · ") + clk(c) + next };
+        return { cls: "open", text: L("Open now · closes ", "இப்போது திறந்துள்ளது · நடை சாத்துதல் ") + clk(c) + next };
       }
     }
-    return { cls: "closed", text: "Closed now · opens " + clock(mins(slots[0][0])) + " tomorrow" };
+    return { cls: "closed", text: L("Closed now · opens " + clk(mins(slots[0][0])) + " tomorrow", "இப்போது நடை சாத்தப்பட்டுள்ளது · நாளை திறப்பு " + clk(mins(slots[0][0]))) };
   }
   function showStatus() {
     document.querySelectorAll("[data-status]").forEach(function (el) {
@@ -453,23 +462,24 @@
     if (factsRow) factsRow.insertAdjacentHTML("afterbegin", '<span class="fact status" data-status="' + PAGE + '"></span>');
   }
   document.querySelectorAll(".abode").forEach(function (card) {
-    var id = (card.getAttribute("href") || "").replace(".html", ""), place = card.querySelector(".place");
+    var id = idFromHref(card.getAttribute("href")), place = card.querySelector(".place");
     if (HOURS[id] && place) place.insertAdjacentHTML("afterend", '<span class="status" data-status="' + id + '"></span>');
   });
   showStatus(); setInterval(showStatus, 60000);
   if (PAGE === "home" && document.getElementById("abode-list")) {
     var hd = document.querySelector("#abodes .section-head .quiet");
-    if (hd) hd.insertAdjacentHTML("beforeend", " Open and closed times show the usual daily hours, in India time. Festival days differ.");
+    if (hd) hd.insertAdjacentHTML("beforeend", L(" Open and closed times show the usual daily hours, in India time. Festival days differ.", " திறந்திருக்கும் நேரம், வழக்கமான தினசரி நேரத்தின்படி (இந்திய நேரம்). திருவிழா நாட்களில் மாறும்."));
   }
 
   // ---------- Murugan calendar ----------
   var DAYS = window.MURUGAN_DAYS || [];
-  var MON = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-  var WDAY = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+  var MON = TA ? ["ஜனவரி", "பிப்ரவரி", "மார்ச்", "ஏப்ரல்", "மே", "ஜூன்", "ஜூலை", "ஆகஸ்ட்", "செப்டம்பர்", "அக்டோபர்", "நவம்பர்", "டிசம்பர்"]
+    : ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+  var WDAY = TA ? ["ஞாயிறு", "திங்கள்", "செவ்வாய்", "புதன்", "வியாழன்", "வெள்ளி", "சனி"] : ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
   function todayIST() { return new Date(Date.now() + 330 * 60000).toISOString().slice(0, 10); }
   function dayDiff(a, b) { return Math.round((Date.parse(b) - Date.parse(a)) / 86400000); }
   function nice(iso) { var d = new Date(iso + "T00:00:00Z"); return WDAY[d.getUTCDay()] + " " + d.getUTCDate() + " " + MON[d.getUTCMonth()]; }
-  function when(n) { return n === 0 ? "Today" : n === 1 ? "Tomorrow" : "in " + n + " days"; }
+  function when(n) { return n === 0 ? L("Today", "இன்று") : n === 1 ? L("Tomorrow", "நாளை") : L("in " + n + " days", "இன்னும் " + n + " நாட்களில்"); }
   function upcoming(n) {
     var t = todayIST(), out = [];
     for (var i = 0; i < DAYS.length && out.length < n; i++) if (DAYS[i].date >= t) out.push(DAYS[i]);
@@ -481,8 +491,9 @@
     var nx = upcoming(2), t0 = todayIST();
     if (nx.length) {
       var e0 = nx[0], n0 = dayDiff(t0, e0.date);
-      band.querySelector(".wrap").innerHTML = '<span class="next-label">' + (n0 === 0 ? "Today" : "Next Murugan day") + '</span> <b>' + e0.name + '</b> <span lang="ta">' + e0.ta + '</span> · ' + nice(e0.date) + (n0 > 0 ? " · " + when(n0) : "") +
-        ' <a href="calendar.html">See all dates</a>';
+      band.querySelector(".wrap").innerHTML = '<span class="next-label">' + (n0 === 0 ? L("Today", "இன்று") : L("Next Murugan day", "அடுத்த முருகன் விசேஷ நாள்")) + '</span> ' +
+        (TA ? '<b>' + e0.ta + '</b>' : '<b>' + e0.name + '</b> <span lang="ta">' + e0.ta + '</span>') + ' · ' + nice(e0.date) + (n0 > 0 ? " · " + when(n0) : "") +
+        ' <a href="' + link("calendar") + '">' + L("See all dates", "எல்லா நாட்களும்") + '</a>';
       band.hidden = false;
     }
   }
@@ -529,11 +540,11 @@
     b.addEventListener("click", function () {
       var label = b.textContent, url = b.getAttribute("data-copy");
       function done(m) { b.textContent = m; setTimeout(function () { b.textContent = label; }, 2000); }
-      copyText(url).then(function () { done("Link copied"); }, function () {
+      copyText(url).then(function () { done(L("Link copied", "இணைப்பு நகலெடுக்கப்பட்டது")); }, function () {
         // Copying is blocked: show the link, selected, so it can be copied by hand.
         var box = b.parentNode.querySelector("input.copy-box");
         if (!box) { b.insertAdjacentHTML("afterend", '<input class="copy-box" type="text" readonly aria-label="Calendar link" value="' + url + '">'); box = b.nextElementSibling; }
-        box.focus(); box.select(); done("Copy this link");
+        box.focus(); box.select(); done(L("Copy this link", "இந்த இணைப்பை நகலெடுக்கவும்"));
       });
     });
   });
