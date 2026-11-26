@@ -314,3 +314,36 @@ details.how ul { margin-top: 10px; }
 }
 
 .cards-top .panel { align-content: start; }
+
+/* Daily alangarams (Palani) */
+.alang-list { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 12px; position: relative; }
+.alang-list::before { content: ""; position: absolute; left: 4%; right: 4%; top: 15px; height: 2px; background: var(--gold); opacity: .55; }
+.alang { position: relative; display: grid; gap: 6px; align-content: start; padding-top: 38px; }
+.alang .dot { position: absolute; top: 6px; left: 50%; transform: translateX(-50%); width: 20px; height: 20px; border-radius: 50%; background: var(--paper); border: 3px solid var(--gold); }
+.alang .card { background: var(--card); border: 1px solid var(--line); border-radius: 6px; padding: 14px 12px; display: grid; gap: 4px; text-align: center; height: 100%; align-content: start; }
+.alang .time { font-weight: 700; color: var(--maroon); font-size: .95rem; }
+.alang .form { font-family: var(--display); font-size: 1.15rem; line-height: 1.2; color: var(--ink); }
+.alang .form-ta { font-family: "Noto Sans Tamil", var(--body); font-size: .85rem; color: var(--maroon); }
+.alang .pooja { font-size: .8rem; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; }
+.alang .meaning { font-size: .9rem; color: var(--muted); margin-top: 4px; }
+.alang .tag { justify-self: center; font-size: .7rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; padding: 2px 9px; border-radius: 99px; background: var(--saffron); color: #fff; }
+.alang.is-now .card, .alang.is-next .card { border: 2px solid var(--saffron); background: #fff4d9; }
+.alang.is-now .dot, .alang.is-next .dot { background: var(--saffron); border-color: var(--saffron); }
+.alang-now { font-weight: 700; color: var(--maroon); }
+@media (max-width: 900px) {
+  .alang-list { grid-template-columns: 1fr; gap: 10px; padding-left: 30px; }
+  .alang-list::before { left: 9px; right: auto; top: 8px; bottom: 8px; width: 2px; height: auto; }
+  .alang { padding-top: 0; }
+  .alang .dot { left: -30px; top: 16px; transform: none; }
+  .alang .card { text-align: left; grid-template-columns: 1fr auto; column-gap: 12px; }
+  .alang .card > * { grid-column: 1; }
+  .alang .time { grid-column: 2; grid-row: 1; text-align: right; }
+  .alang .tag { justify-self: start; }
+}
+.alang-toggle { display: none; }
+@media (max-width: 900px) {
+  .alang-list:not(.expanded) .alang:not(.is-now):not(.is-next) { display: none; }
+  .alang-list:not(.expanded) { padding-left: 0; }
+  .alang-list:not(.expanded)::before, .alang-list:not(.expanded) .dot { display: none; }
+  .alang-toggle { display: inline-flex; justify-self: start; align-items: center; gap: 6px; background: none; border: 1px solid var(--maroon); color: var(--maroon); border-radius: 99px; padding: 6px 14px; font: inherit; font-weight: 700; font-size: .9rem; cursor: pointer; }
+}
