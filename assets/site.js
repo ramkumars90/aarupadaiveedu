@@ -582,4 +582,30 @@
     if (window.goatcounter && window.goatcounter.count) window.goatcounter.count({ path: "contact", title: document.title, event: true });
     location.href = "mailto:" + rev(P[0]) + "@" + rev(P[1]) + "?subject=" + encodeURIComponent("Aaru Padai website");
   });
+
+  // ---------- Daily alangarams (Palani) ----------
+  var alangList = document.getElementById("alang-list");
+  if (alangList) {
+    var hm = function (t) { var p = t.split(":"); return +p[0] * 60 + +p[1]; };
+    var alangs = [].slice.call(alangList.querySelectorAll(".alang")), alangOut = document.querySelector("[data-alang-now]"), alangBtn = document.querySelector(".alang-toggle"), d = alangList.dataset;
+    var showAlang = function () {
+      var ist = new Date(Date.now() + 330 * 60000), now = ist.getUTCHours() * 60 + ist.getUTCMinutes(), hit = null, next = null;
+      alangs.forEach(function (li) {
+        li.classList.remove("is-now", "is-next");
+        var t = li.querySelector(".tag"); if (t) t.remove();
+        var a = hm(li.getAttribute("data-start")), b = hm(li.getAttribute("data-end"));
+        if (now >= a && now < b) hit = li; else if (!next && now < a) next = li;
+      });
+      var el = hit || next || alangs[0];
+      el.classList.add(hit ? "is-now" : "is-next");
+      el.querySelector(".card").insertAdjacentHTML("afterbegin", '<span class="tag">' + (hit ? d.tagNow : d.tagNext) + "</span>");
+      if (alangOut) alangOut.textContent = (hit ? d.now : d.next) + " " + el.querySelector(".form").textContent + " " + d.suffix + (hit ? "." : ", " + d.at + " " + el.querySelector(".time").textContent + (next ? "" : " " + d.tomorrow) + ".");
+    };
+    showAlang(); setInterval(showAlang, 60000);
+    if (alangBtn) alangBtn.addEventListener("click", function () {
+      var open = alangList.classList.toggle("expanded");
+      alangBtn.setAttribute("aria-expanded", open);
+      alangBtn.textContent = open ? alangBtn.getAttribute("data-less") : alangBtn.getAttribute("data-more");
+    });
+  }
 })();
